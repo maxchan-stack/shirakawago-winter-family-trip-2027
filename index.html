@@ -8,12 +8,193 @@
   <meta name="mobile-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
   <title>白川鄉合掌村雪境親子自駕手繪行程 · 2027.1.21–1.26</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Klee+One:wght@400;600&family=Noto+Serif+TC:wght@400;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    // 一鍵複製提示
+    function copyText(text, label) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(`已複製 ${label}：${text}`);
+        }).catch(() => fallbackCopy(text, label));
+      } else {
+        fallbackCopy(text, label);
+      }
+    }
+
+    function fallbackCopy(text, label) {
+      const tempInput = document.createElement("input");
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand("copy");
+        showToast(`已複製 ${label}：${text}`);
+      } catch (e) {
+        prompt("請手動複製：", text);
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    // 即時匯率換算
+    const DEFAULT_RATE = 0.215;
+    function calcCurrency(from) {
+      const jpyInput = document.getElementById("input-jpy");
+      const twdInput = document.getElementById("input-twd");
+      if (!jpyInput || !twdInput) return;
+      if (from === 'jpy') {
+        const jpy = parseFloat(jpyInput.value) || 0;
+        twdInput.value = Math.round(jpy * DEFAULT_RATE);
+      } else {
+        const twd = parseFloat(twdInput.value) || 0;
+        jpyInput.value = Math.round(twd / DEFAULT_RATE);
+      }
+    }
+    calcCurrency('jpy');
+
+    // 互動式打包清單資料與 LocalStorage 邏輯
+    const CHECKLIST_DATA = [
+      {
+        category: "必備證件與自駕手續",
+        items: [
+          "台灣汽車駕照正本（駕駛本人必帶，不可過期）",
+          "台灣汽車駕照日文譯本（監理所申辦，必帶正本）",
+          "全家人護照正本（有效期限需 6 個月以上）",
+          "租車確認單憑證（列印或手機 PDF 離線檔）",
+          "高額度信用卡（租車押金與加油過路費使用）",
+          "日本上網 eSIM / 實體 SIM 卡（確認漫遊開通）"
+        ]
+      },
+      {
+        category: "2Y3M 幼童極地防寒裝備",
+        items: [
+          "防水防風連身雪衣（雪地活動防滲水必備）",
+          "防滑保暖高筒雪靴（魔鬼氈好穿脫款）",
+          "保暖防寒連指防水手套（附防丟防墜繩）",
+          "護耳式毛帽 + 柔軟純棉脖圍（防冷風灌入）",
+          "純棉排汗發熱衣 3 套（室內暖氣防汗疹）",
+          "厚羊毛保暖長襪 4 雙（每天多備一雙在隨身包）"
+        ]
+      },
+      {
+        category: "幼童隨身常備藥品與護理",
+        items: [
+          "退燒藥水（安佳熱 / 依普芬小兒懸浮液）",
+          "幼兒專用耳溫槍（每日早晚量測體溫）",
+          "退熱貼 + 生理食鹽水（防鼻塞乾燥清潔）",
+          "高保濕面霜 / 凡士林（日本極乾防蘋果臉）",
+          "抗組織胺小兒感冒藥水（兒科行前門診常備）",
+          "常備透氣 OK 繃與外用小護士藥膏"
+        ]
+      },
+      {
+        category: "親子自駕旅行隨身神器",
+        items: [
+          "人體工學高承重雙肩背巾（合掌村推車無法推）",
+          "車用兒童安全座椅（已向租車公司預約確認）",
+          "象印 / 膳魔師保溫水壺（隨時提供溫水沖奶）",
+          "拋棄式圍兜 + 幼童專用餐具食物剪",
+          "長途車程專用安撫米餅零食與繪本童書",
+          "行動電源 20000mAh（低溫手機耗電極快）"
+        ]
+      }
+    ];
+
+    function initChecklist() {
+      const container = document.getElementById("interactive-checklist-container");
+      if (!container) return;
+      const saved = JSON.parse(localStorage.getItem("shirakawago_checklist_2027") || "{}");
+
+      let totalItems = 0;
+      let checkedItems = 0;
+      let html = "";
+
+      CHECKLIST_DATA.forEach((group, gIdx) => {
+        html += `<div class="interactive-check-group">
+          <div class="check-category-title">${group.category}</div>`;
+        group.items.forEach((item, iIdx) => {
+          totalItems++;
+          const key = `g${gIdx}_i${iIdx}`;
+          const isChecked = !!saved[key];
+          if (isChecked) checkedItems++;
+          html += `<label class="interactive-check-item ${isChecked ? 'done' : ''}">
+            <input type="checkbox" data-key="${key}" ${isChecked ? 'checked' : ''} onchange="toggleCheckItem(this)" />
+            <span>${item}</span>
+          </label>`;
+        });
+        html += `</div>`;
+      });
+
+      container.innerHTML = html;
+      updateChecklistProgress(checkedItems, totalItems);
+    }
+
+    function toggleCheckItem(el) {
+      const key = el.dataset.key;
+      const parent = el.closest(".interactive-check-item");
+      const saved = JSON.parse(localStorage.getItem("shirakawago_checklist_2027") || "{}");
+
+      if (el.checked) {
+        saved[key] = true;
+        parent.classList.add("done");
+      } else {
+        delete saved[key];
+        parent.classList.remove("done");
+      }
+      localStorage.setItem("shirakawago_checklist_2027", JSON.stringify(saved));
+
+      const checkboxes = document.querySelectorAll("#interactive-checklist-container input[type='checkbox']");
+      const total = checkboxes.length;
+      const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+      updateChecklistProgress(checked, total);
+    }
+
+    function updateChecklistProgress(checked, total) {
+      const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+      const bar = document.getElementById("checklist-progress");
+      const text = document.getElementById("progress-text");
+      if (bar) bar.style.width = pct + "%";
+      if (text) text.textContent = `已準備 ${checked} / ${total} 項 (${pct}%)`;
+    }
+
+    function resetChecklist() {
+      if (confirm("確定要清空所有打包勾選進度嗎？")) {
+        localStorage.removeItem("shirakawago_checklist_2027");
+        initChecklist();
+      }
+    }
+
+    // 註冊 Service Worker 離線支援
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          console.log('ServiceWorker registered:', reg.scope);
+        }).catch(err => {
+          console.log('ServiceWorker registration failed:', err);
+        });
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      initChecklist();
+    });
+
+  </script>
 
   <style>
     :root {
@@ -591,6 +772,313 @@
       letter-spacing: 0.02em;
     }
 
+  
+    /* ========== 車載導航與 Google Maps 標籤 ========== */
+    .spot-nav-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0.65rem 0 0.5rem 0;
+      padding: 0.45rem 0.65rem;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(59, 130, 246, 0.22);
+      border-radius: 8px;
+      font-size: 0.78rem;
+    }
+    .btn-nav-gmap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.24rem 0.65rem;
+      background: #1e3a8a;
+      color: #ffffff !important;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 0.74rem;
+      letter-spacing: 0.02em;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .btn-nav-gmap:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+    .nav-code-group {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .nav-code-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.5rem;
+      background: #ffffff;
+      border: 1px solid rgba(30, 41, 59, 0.18);
+      border-radius: 5px;
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.74rem;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .nav-code-pill:hover {
+      background: #f1f5f9;
+      border-color: #3b82f6;
+      color: #1d4ed8;
+    }
+    .nav-code-pill .code-label {
+      font-size: 0.64rem;
+      font-weight: 700;
+      color: #475569;
+      padding: 1px 4px;
+      background: #e2e8f0;
+      border-radius: 3px;
+    }
+    .nav-code-pill .copy-hint {
+      font-size: 0.66rem;
+      color: #2563eb;
+      opacity: 0.88;
+      margin-left: 2px;
+    }
+
+    /* 複製提示 Toast */
+    .toast-notification {
+      position: fixed;
+      bottom: 2.2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1b242c;
+      color: #ffffff;
+      padding: 0.55rem 1.25rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      z-index: 99999;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    }
+    .toast-notification.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* 即時路況與醫療卡片 */
+    .road-cam-grid, .emergency-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 0.8rem;
+    }
+    .cam-card, .emergency-hospital-card {
+      background: #ffffff;
+      border: 1px solid rgba(30, 41, 59, 0.12);
+      border-radius: 10px;
+      padding: 1.1rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .cam-card h4, .emergency-hospital-card h4 {
+      font-size: 0.94rem;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+    .cam-card p, .emergency-hospital-card p {
+      font-size: 0.79rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+    .btn-action-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      padding: 0.38rem 0.8rem;
+      border: 1px solid #3b82f6;
+      color: #1d4ed8 !important;
+      background: rgba(59, 130, 246, 0.05);
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.76rem;
+      font-weight: 600;
+      transition: all 0.18s ease;
+    }
+    .btn-action-outline:hover {
+      background: #2563eb;
+      color: #ffffff !important;
+    }
+    .emergency-banner {
+      background: linear-gradient(135deg, #fff1f2 0%, #fee2e2 100%);
+      border: 1.5px solid #f87171;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.2rem;
+    }
+    .emergency-banner h3 {
+      color: #991b1b;
+      font-size: 1.02rem;
+      margin-bottom: 0.4rem;
+    }
+    .hotline-pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 0.6rem 0;
+    }
+    .hotline-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.38rem 0.85rem;
+      background: #b91c1c;
+      color: #ffffff !important;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      box-shadow: 0 2px 8px rgba(185, 28, 28, 0.25);
+    }
+    .med-phrases {
+      background: #ffffff;
+      border: 1px dashed rgba(185, 28, 28, 0.3);
+      border-radius: 8px;
+      padding: 0.8rem;
+      margin-top: 0.8rem;
+    }
+    .med-phrase-item {
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .med-phrase-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .med-phrase-item .ja {
+      font-family: "Shippori Mincho", serif;
+      font-weight: 700;
+      font-size: 0.84rem;
+      color: #1b242c;
+      display: block;
+    }
+    .med-phrase-item .zh {
+      color: #64748b;
+      font-size: 0.76rem;
+    }
+
+    /* 互動式打包清單 */
+    .checklist-progress-card {
+      background: #ffffff;
+      border: 1.5px solid rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.2rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 0.6rem 0 0.8rem 0;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      transition: width 0.3s ease;
+    }
+    .interactive-check-group {
+      margin-bottom: 1rem;
+    }
+    .check-category-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--forest-pine);
+      margin-bottom: 0.45rem;
+      padding-left: 0.4rem;
+      border-left: 3px solid #3b82f6;
+    }
+    .interactive-check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      padding: 0.4rem 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      user-select: none;
+    }
+    .interactive-check-item:hover {
+      background: rgba(59, 130, 246, 0.05);
+    }
+    .interactive-check-item input[type="checkbox"] {
+      margin-top: 0.22rem;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: #2563eb;
+    }
+    .interactive-check-item.done span {
+      text-decoration: line-through;
+      color: #94a3b8;
+    }
+    .interactive-check-item span {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    /* 匯率計算機卡片 */
+    .converter-card {
+      background: #ffffff;
+      border: 1px solid rgba(30, 41, 59, 0.12);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.2rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .converter-inputs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    .converter-input-wrap {
+      flex: 1;
+      min-width: 130px;
+    }
+    .converter-input-wrap label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 0.25rem;
+    }
+    .converter-input-wrap input {
+      width: 100%;
+      padding: 0.48rem 0.65rem;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      font-family: inherit;
+    }
+    .converter-input-wrap input:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+
   </style>
 </head>
 <body>
@@ -708,6 +1196,22 @@
             </div>
             <div class="place">中部國際機場 ➔ 名鐵名古屋站</div>
             <div class="place-en">Meitetsu Airport Express μ-SKY</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=中部国際空港第1ターミナル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0569-38-1195', '電話號碼')">
+                  <span class="code-label">TEL</span> 0569-38-1195
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('371 857 064*22', 'MapCode')">
+                  <span class="code-label">MC</span> 371 857 064*22
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               搭乘全車指定席的 μ-SKY 快速直達名古屋市中心，車廂平穩且設有大件行李放置架，免去第一晚疲勞夜間雪駕風險。
             </div>
@@ -724,6 +1228,22 @@
             </div>
             <div class="place">入住名古屋 JR 門樓飯店 / 萬豪飯店</div>
             <div class="place-en">Nagoya JR Gate Tower Hotel</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=名古屋JRゲートタワーホテル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('052-566-2111', '電話號碼')">
+                  <span class="code-label">TEL</span> 052-566-2111
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('4 316 023*14', 'MapCode')">
+                  <span class="code-label">MC</span> 4 316 023*14
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               飯店大廳與名古屋車站完全共構，推著行李與孩子不用走進戶外寒風。晚餐於高島屋或門樓 12-13F 美食街享用暖胃名古屋烏龍麵或親子丼，早點讓寶寶入睡適應氣溫。
             </div>
@@ -754,6 +1274,22 @@
             </div>
             <div class="place">名古屋站前租車據點取車</div>
             <div class="place-en">Toyota / Times Car Rental Nagoya Station</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=ニッポンレンタカー+名古屋駅東口" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('052-581-0919', '電話號碼')">
+                  <span class="code-label">TEL</span> 052-581-0919
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('4 315 152*77', 'MapCode')">
+                  <span class="code-label">MC</span> 4 315 152*77
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               領取配備雪胎（Studless Tires）與 4WD 四輪驅動之中型 SUV，務必請店員協助確認幼童汽座已緊固安裝，並租借 ETC 及 CEP（高速公路外國人 Pass）。
             </div>
@@ -770,6 +1306,22 @@
             </div>
             <div class="place">郡上八幡散策 · 食品模型工房 samplekobo</div>
             <div class="place-en">Gujo Hachiman & Sample Village</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=郡上八幡サンプル工房" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0575-67-1870', '電話號碼')">
+                  <span class="code-label">TEL</span> 0575-67-1870
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('403 747 483*71', 'MapCode')">
+                  <span class="code-label">MC</span> 403 747 483*71
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               郡上八幡是日本仿真食品模型的發祥地，工房內陳列極其逼真的冰淇淋、炸蝦拉麵等模型，2 歲寶寶看得目不轉睛。午餐在古街品嚐飛驒牛可樂餅與熱呼呼丸子。
             </div>
@@ -798,6 +1350,22 @@
             </div>
             <div class="place">入住高山 Green Hotel / 飛驒高山老街黃昏步道</div>
             <div class="place-en">Takayama Green Hotel & Sanmachi Suji</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=高山グリーンホテル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0577-33-5500', '電話號碼')">
+                  <span class="code-label">TEL</span> 0577-33-5500
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('191 166 478*22', 'MapCode')">
+                  <span class="code-label">MC</span> 191 166 478*22
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               飯店擁有大型和室與溫泉庭園。傍晚用背巾背著寶寶在三町筋木造古街散步（兩旁有清澈雪水水溝），晚餐享用高評價飛驒牛燒肉（如味藏天國），入口即化！
             </div>
@@ -841,6 +1409,22 @@
             </div>
             <div class="place">合掌造村落漫步 · 和田家內部參觀 · 相逢橋拍照</div>
             <div class="place-en">Wada House & Deai Bridge Snow Walk</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=白川郷せせらぎ公園駐車場" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('05769-6-1013', '電話號碼')">
+                  <span class="code-label">TEL</span> 05769-6-1013
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('549 018 438*11', 'MapCode')">
+                  <span class="code-label">MC</span> 549 018 438*11
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               走過相逢橋進入宛若童話薑餅屋的童話聚落。讓寶寶穿上防水雪衣雪靴踩踩軟綿綿的白雪，其餘路程以高支撐背巾代步。參觀重要文化財「和田家」，進入室內木地板避寒取暖，欣賞巨大茅草屋頂結構。
             </div>
@@ -860,6 +1444,22 @@
             </div>
             <div class="place">白川鄉荻町城山天守閣展望台 ➔ 返回高山市區</div>
             <div class="place-en">Shiroyama Viewpoint & Return Drive to Takayama</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=荻町城跡展望台" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('05769-6-1728', '電話號碼')">
+                  <span class="code-label">TEL</span> 05769-6-1728
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('549 049 190*33', 'MapCode')">
+                  <span class="code-label">MC</span> 549 049 190*33
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               搭乘村內接駁車或自駕登上城山天守閣展望台，以經典明信片高空視角俯瞰整座被厚雪包圍的童話合掌村！隨後下午兩點前啟程返回高山，避開午後氣溫驟降與暗冰，寶寶在溫暖車內安穩午睡充電。
             </div>
@@ -876,6 +1476,22 @@
             </div>
             <div class="place">高山飯店溫泉休整 · 高山特產飛驒牛壽司與燒肉</div>
             <div class="place-en">Hot Springs & Rest in Takayama</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=味蔵天国+高山" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0577-37-1129', '電話號碼')">
+                  <span class="code-label">TEL</span> 0577-37-1129
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('191 195 244*71', 'MapCode')">
+                  <span class="code-label">MC</span> 191 195 244*71
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               續住高山同一飯店（免打包換行李）。全家在飄著雪花的溫泉池放鬆雙腿，晚上買高山地酒、飛驒牛手握壽司回房間愜意享用。
             </div>
@@ -907,6 +1523,22 @@
             </div>
             <div class="place">高山宮川朝市晨間漫步</div>
             <div class="place-en">Miyagawa Morning Market</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=宮川朝市" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0577-32-3333', '電話號碼')">
+                  <span class="code-label">TEL</span> 0577-32-3333
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('191 221 445*33', 'MapCode')">
+                  <span class="code-label">MC</span> 191 221 445*33
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               沿著宮川河畔的傳統市集，沿途欣賞垂掛在屋簷的巨大冰柱與河中野鴨。在地小農販售清脆多汁的飛驒蘋果、蜜柑與草莓，現切給寶寶當健康天然水果點心。
             </div>
@@ -923,6 +1555,22 @@
             </div>
             <div class="place">高山陣屋散策 · 高山昭和館童玩體驗</div>
             <div class="place-en">Takayama Showa-kan Museum</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=高山陣屋" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0577-32-0643', '電話號碼')">
+                  <span class="code-label">TEL</span> 0577-32-0643
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('191 196 663*88', 'MapCode')">
+                  <span class="code-label">MC</span> 191 196 663*88
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               替代寒冷嚴苛的新穗高高海拔纜車，帶寶寶走進暖呼呼的昭和館。內部完整復刻 1960 年代日本雜貨店、舊教室、老爺車與復古玩具，幼童可以親手觸碰體驗，避寒避風又好玩。
             </div>
@@ -951,6 +1599,22 @@
             </div>
             <div class="place">入住下呂溫泉頂級旅館（水明館 / 湯之島館）</div>
             <div class="place-en">Gero Onsen Suimeikan / Yunoshimakan</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=下呂温泉水明館" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0576-25-2800', '電話號碼')">
+                  <span class="code-label">TEL</span> 0576-25-2800
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('386 126 534*36', 'MapCode')">
+                  <span class="code-label">MC</span> 386 126 534*36
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               預約旅館內的「貸切家族風呂」，專屬私密浴池水溫溫和、鹼性滑順被譽為美人湯，全家兩大一小能一同泡湯嬉戲不怕打擾他人。晚餐於客房內悠閒享用精緻會席料理。
             </div>
@@ -982,6 +1646,22 @@
             </div>
             <div class="place">下呂溫泉街 · 白鷺之湯 · 下呂布丁</div>
             <div class="place-en">Gero Onsen Town Walk & Gero Pudding</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=白鷺の湯+下呂温泉" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0576-25-2462', '電話號碼')">
+                  <span class="code-label">TEL</span> 0576-25-2462
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('386 126 718*14', 'MapCode')">
+                  <span class="code-label">MC</span> 386 126 718*14
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               早晨沿溫泉街散步，帶著小毛巾在免費的白鷺足湯幫寶寶泡泡小腳丫，順便品嚐人氣極高的青蛙招牌「下呂溫泉布丁」。
             </div>
@@ -1006,6 +1686,22 @@
             </div>
             <div class="place">名古屋市區歸還租車 ➔ 入住榮町商圈飯店</div>
             <div class="place-en">Return Rental Car & Check-in Sakae</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=TIAD+オートグラフコレクション+名古屋" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('052-252-2288', '電話號碼')">
+                  <span class="code-label">TEL</span> 052-252-2288
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('4 290 554*77', 'MapCode')">
+                  <span class="code-label">MC</span> 4 290 554*77
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               在名古屋市中心順利還車，圓滿完成 4 天雪地自駕！入住榮町生活機能極佳的親子友善飯店（如 TIAD 或 名古屋日航尚格）。
             </div>
@@ -1022,6 +1718,22 @@
             </div>
             <div class="place">阿卡將母嬰採購 · 久屋大通公園 · 綠洲 21 水之宇宙船</div>
             <div class="place-en">Akachan Honpo, Hisaya-odori Park & Oasis 21</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=オアシス21+名古屋" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('052-962-1011', '電話號碼')">
+                  <span class="code-label">TEL</span> 052-962-1011
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('4 320 011*55', 'MapCode')">
+                  <span class="code-label">MC</span> 4 320 011*55
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               在市區專門採買日本超人氣 2 歲童裝、米餅與防寒備品。傍晚漫步於久屋大通公園與綠洲 21（Oasis 21），走上頂層「水之宇宙船」玻璃步道，俯瞰璀璨倒影與中部電力 MIRAI TOWER 點燈。
             </div>
@@ -1038,6 +1750,22 @@
             </div>
             <div class="place">晚餐 · 熱田蓬萊軒（松坂屋店）炭烤鰻魚飯三吃</div>
             <div class="place-en">Atsuta Houraiken Hitsumabushi</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=あつた蓬莱軒+松坂屋店" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('052-264-3825', '電話號碼')">
+                  <span class="code-label">TEL</span> 052-264-3825
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('4 289 114*88', 'MapCode')">
+                  <span class="code-label">MC</span> 4 289 114*88
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               造訪名古屋必吃百年名店「熱田蓬萊軒」！招牌木桶盛裝現烤焦香鰻魚，經典三種吃法：一品原味蒲燒、二拌山葵細蔥海苔、三淋熱高湯茶漬飯，為名古屋之夜劃下最完美的味覺句點。
             </div>
@@ -1069,6 +1797,22 @@
             </div>
             <div class="place">磁浮鐵道館（Scmaglev and Railway Park）</div>
             <div class="place-en">SCMAGLEV and Railway Park</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=リニア・鉄道館" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('052-389-6100', '電話號碼')">
+                  <span class="code-label">TEL</span> 052-389-6100
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('4 026 517*41', 'MapCode')">
+                  <span class="code-label">MC</span> 4 026 517*41
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               全室內溫暖無障礙園區！展示從蒸汽火車、新幹線到未來超電導磁浮列車的 39 輛真實列車，還有全日本最大規模的超精細鐵道立體模型，2 歲小孩看到會動的火車絕對嗨翻天！
             </div>
@@ -1097,6 +1841,22 @@
             </div>
             <div class="place">常滑巨型招財貓 ＆ FLIGHT OF DREAMS（波音 787 實機公園）</div>
             <div class="place-en">Tokoname Giant Tokonyan & Flight of Dreams</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=とこにゃん+常滑市" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0569-35-0966', '電話號碼')">
+                  <span class="code-label">TEL</span> 0569-35-0966
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('371 784 275*66', 'MapCode')">
+                  <span class="code-label">MC</span> 371 784 275*66
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               前往機場前順訪臨空常滑「巨大招財貓 Tokonyan」，拍下祈求平安招福的超萌合照！隨後抵達中部機場 FLIGHT OF DREAMS，機翼下方設有免費幼童遊戲區，走到頂樓 Sky Deck 迎風觀看飛機滑行起飛。
             </div>
@@ -1119,9 +1879,152 @@
 
     <!-- 10. TAB 8: 2Y3M 親子雪地生存手冊 (GUIDE) -->
     <section class="tab-panel" data-panel="guide" id="panel-guide">
+      <!-- 匯率即時試算 -->
+      <div class="converter-card">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="font-size: 1.02rem; color: var(--forest-pine);">日幣／台幣手繪即時換算</h3>
+          <span style="font-size: 0.74rem; color: #64748b;">參考匯率：1 JPY ≈ <span id="rate-display">0.215</span> TWD</span>
+        </div>
+        <div class="converter-inputs">
+          <div class="converter-input-wrap">
+            <label>日圓 (JPY ¥)</label>
+            <input type="number" id="input-jpy" placeholder="請輸入日幣金額" value="10000" oninput="calcCurrency('jpy')" />
+          </div>
+          <div style="font-size: 1.2rem; color: #94a3b8; padding-top: 1rem;">⇄</div>
+          <div class="converter-input-wrap">
+            <label>新台幣 (TWD NT$)</label>
+            <input type="number" id="input-twd" placeholder="約折合台幣" oninput="calcCurrency('twd')" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 緊急小兒醫療救護卡 -->
+      <div class="emergency-banner">
+        <h3>小兒急病與緊急醫療救護支援卡</h3>
+        <p style="font-size: 0.8rem; color: #7f1d1d; line-height: 1.6;">
+          幼童（2Y3M）在零下雪地環境如遇突發高熱痙攣、哮吼、失溫或意外滑倒，請保持冷靜依序使用以下資源求助：
+        </p>
+        <div class="hotline-pill-group">
+          <a href="tel:#8000" class="hotline-btn">
+            撥打 #8000（日本小兒急病熱線）
+          </a>
+          <a href="tel:119" class="hotline-btn">
+            撥打 119（救護車 / 火警）
+          </a>
+          <a href="tel:#7119" class="hotline-btn" style="background: #1e3a8a;">
+            撥打 #7119（一般救急諮詢）
+          </a>
+        </div>
+
+        <div class="med-phrases">
+          <div style="font-weight: 700; font-size: 0.78rem; color: #991b1b; margin-bottom: 0.4rem;">
+            緊急狀況直接出示給飯店櫃檯或醫護人員字卡：
+          </div>
+          <div class="med-phrase-item">
+            <span class="ja">「子供が急に高熱を出しました。2歳3ヶ月です。」</span>
+            <span class="zh">（小孩突然發高燒，年齡為 2 歲 3 個月。）</span>
+          </div>
+          <div class="med-phrase-item">
+            <span class="ja">「熱性けいれんの疑いがあります。救急車をお願いします。」</span>
+            <span class="zh">（疑似出現熱痙攣抽搐症狀，請立刻協助叫救護車。）</span>
+          </div>
+          <div class="med-phrase-item">
+            <span class="ja">「子供が雪道で滑って頭を打ちました。」</span>
+            <span class="zh">（孩子在雪地滑倒碰撞到頭部。）</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <h4 style="font-size: 0.88rem; color: #991b1b; margin-bottom: 0.4rem;">沿線 24 小時核心責任醫院（可直接導航）</h4>
+          <div class="emergency-grid">
+            <div class="emergency-hospital-card">
+              <div>
+                <h4>高山赤十字病院</h4>
+                <p>飛驒地區唯一具備完整 24 小時急診與小兒科之大型綜合醫院。<br><strong>電話</strong>：0577-32-1111<br><strong>地址</strong>：岐阜県高山市天満町3丁目11</p>
+              </div>
+              <a href="https://www.google.com/maps/search/?api=1&query=高山赤十字病院" target="_blank" rel="noopener noreferrer" class="btn-action-outline">Google Maps 導航至高山赤十字</a>
+            </div>
+            <div class="emergency-hospital-card">
+              <div>
+                <h4>下呂市立溫泉病院</h4>
+                <p>下呂溫泉地區核心公立醫療院所，提供急診診療服務。<br><strong>電話</strong>：0576-25-2251<br><strong>地址</strong>：岐阜県下呂市森2211</p>
+              </div>
+              <a href="https://www.google.com/maps/search/?api=1&query=下呂市立温泉病院" target="_blank" rel="noopener noreferrer" class="btn-action-outline">Google Maps 導航至下呂溫泉病院</a>
+            </div>
+            <div class="emergency-hospital-card">
+              <div>
+                <h4>名古屋市立大學病院</h4>
+                <p>名古屋市區大型大學附設綜合救急醫學中心，重症與小兒科設備完善。<br><strong>電話</strong>：052-851-5511<br><strong>地址</strong>：愛知県名古屋市瑞穂区川澄1</p>
+              </div>
+              <a href="https://www.google.com/maps/search/?api=1&query=名古屋市立大学病院" target="_blank" rel="noopener noreferrer" class="btn-action-outline">Google Maps 導航至名市大病院</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 即時雪道與天候路況監控入口 -->
+      <div class="checklist-progress-card">
+        <h3 style="font-size: 1.02rem; color: var(--forest-pine); margin-bottom: 0.4rem;">雪道自駕即時路況與雪況 WebCam</h3>
+        <p style="font-size: 0.8rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.8rem;">
+          冬季高山與白川鄉降雪頻繁，開車出發前請務必透過官方即時鏡頭確認是否有「通行止」（全線封閉）或「冬用タイヤ規制」：
+        </p>
+        <div class="road-cam-grid">
+          <div class="cam-card">
+            <div>
+              <h4>NEXCO 中日本 iHighway</h4>
+              <p>即時監控東海北陸自動車道、名神高速道路之事故、降雪封路與雪鏈輪胎管制。</p>
+            </div>
+            <a href="https://c-ihighway.jp/pcsite/map?area=area04" target="_blank" rel="noopener noreferrer" class="btn-action-outline">開啟 NEXCO 即時路況網</a>
+          </div>
+          <div class="cam-card">
+            <div>
+              <h4>白川鄉官方 Live Camera</h4>
+              <p>官方架設於荻町合掌聚落之即時攝影機，可目視村內最新雪量與能見度。</p>
+            </div>
+            <a href="https://shirakawa-go.org/livecam/" target="_blank" rel="noopener noreferrer" class="btn-action-outline">查看白川鄉即時監視影像</a>
+          </div>
+          <div class="cam-card">
+            <div>
+              <h4>岐阜縣道路情報便（道情報）</h4>
+              <p>岐阜縣境內國道 41 號、國道 156 號等山區主要幹線之即時路面積雪監視鏡頭。</p>
+            </div>
+            <a href="https://www.pref.gifu.lg.jp/site/douro/" target="_blank" rel="noopener noreferrer" class="btn-action-outline">查看岐阜山區公路即時路況</a>
+          </div>
+          <div class="cam-card">
+            <div>
+              <h4>tenki.jp 雪道行車危險指數</h4>
+              <p>日本氣象協會提供之各區路面結冰、積雪打滑危險度 24 小時預測評估。</p>
+            </div>
+            <a href="https://tenki.jp/road/" target="_blank" rel="noopener noreferrer" class="btn-action-outline">開啟雪道危險度指數</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 互動式行李防寒與出國備品清單 -->
+      <div class="checklist-progress-card">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="font-size: 1.02rem; color: var(--forest-pine);">出國行李與幼兒防寒互動勾選清單</h3>
+          <button onclick="resetChecklist()" style="background: none; border: 1px solid #cbd5e1; padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.72rem; color: #64748b; cursor: pointer;">清空勾選</button>
+        </div>
+        <p style="font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.2rem;">
+          勾選進度將自動儲存於手機本地端，重新整理頁面不消失。
+        </p>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="checklist-progress"></div>
+        </div>
+        <div style="text-align: right; font-size: 0.76rem; font-weight: 700; color: #2563eb; margin-bottom: 0.75rem;" id="progress-text">
+          已完成 0 / 24 項 (0%)
+        </div>
+
+        <div id="interactive-checklist-container">
+          <!-- 由 JavaScript 動態渲染並綁定 localStorage -->
+        </div>
+      </div>
+
+      <!-- 原有自駕與溫泉心法 -->
       <div class="utility-grid">
         <div class="guide-card">
-          <h3>👶 2Y3M 寶寶雪地著裝心法</h3>
+          <h3>2Y3M 幼童極地雪地著裝心法</h3>
           <ul class="checklist">
             <li><strong>內層（排汗）</strong>：透氣純棉或嬰幼兒專用排汗保暖發熱衣，室內開強暖氣時不悶汗。</li>
             <li><strong>中層（保暖）</strong>：刷毛長褲 + 柔軟抓絨衛衣或薄羽絨背心。</li>
@@ -1133,7 +2036,7 @@
         </div>
 
         <div class="guide-card">
-          <h3>🚗 冬季雪道自駕安全守則</h3>
+          <h3>冬季雪道自駕安全守則</h3>
           <ul class="checklist">
             <li><strong>車型與輪胎</strong>：必須指名 4WD 四輪驅動 + 4 輪無釘雪胎（Studless Tires）。</li>
             <li><strong>安全車距</strong>：雪地煞車距離為平地 3~4 倍，嚴禁急踩煞車與急轉方向盤。</li>
@@ -1144,11 +2047,12 @@
         </div>
 
         <div class="guide-card">
-          <h3>♨️ 幼童溫泉安全備忘錄</h3>
+          <h3>幼童溫泉安全備忘錄</h3>
           <ul class="checklist">
-            <li><strong>水溫控制</strong>：日本溫泉泉溫常達 41°C~43°C，幼童皮膚嫩，宜以 38°C~40°C 為上限，入池前先在腳邊淋溫水試溫。</li>
-            <li><strong>貸切風呂優先</strong>：選用獨立家庭湯屋，全家一起洗澡換衣，不必擔心大人小孩分開手忙腳亂。</li>
-            <li><strong>時間不宜過長</strong>：每次浸泡 5~8 分鐘即可起身，泡完立即塗抹保濕乳液並補充溫水。</li>
+            <li><strong>泉質溫和優先</strong>：下呂溫泉泉質屬單純鹼性泉（美人湯），溫和不刺激幼兒細嫩肌膚。</li>
+            <li><strong>家族貸切風呂</strong>：有帶小童務必預約「貸切風呂」（獨立家庭湯屋），隱私佳且能自由調節冷水降溫。</li>
+            <li><strong>入浴時間控制</strong>：水溫建議調節至 38°C~39°C 左右，每次浸泡不超過 5~8 分鐘。</li>
+            <li><strong>泡湯後水分補給</strong>：泡完立刻擦乾全身並穿上保暖衣物，喝 100~150ml 溫水或配方奶補充水分。</li>
           </ul>
         </div>
       </div>
@@ -1224,6 +2128,186 @@
         map.fitBounds(routeLine.getBounds().pad(0.15));
       }
     });
+  
+    // 一鍵複製提示
+    function copyText(text, label) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(`已複製 ${label}：${text}`);
+        }).catch(() => fallbackCopy(text, label));
+      } else {
+        fallbackCopy(text, label);
+      }
+    }
+
+    function fallbackCopy(text, label) {
+      const tempInput = document.createElement("input");
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand("copy");
+        showToast(`已複製 ${label}：${text}`);
+      } catch (e) {
+        prompt("請手動複製：", text);
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    // 即時匯率換算
+    const DEFAULT_RATE = 0.215;
+    function calcCurrency(from) {
+      const jpyInput = document.getElementById("input-jpy");
+      const twdInput = document.getElementById("input-twd");
+      if (!jpyInput || !twdInput) return;
+      if (from === 'jpy') {
+        const jpy = parseFloat(jpyInput.value) || 0;
+        twdInput.value = Math.round(jpy * DEFAULT_RATE);
+      } else {
+        const twd = parseFloat(twdInput.value) || 0;
+        jpyInput.value = Math.round(twd / DEFAULT_RATE);
+      }
+    }
+    calcCurrency('jpy');
+
+    // 互動式打包清單資料與 LocalStorage 邏輯
+    const CHECKLIST_DATA = [
+      {
+        category: "必備證件與自駕手續",
+        items: [
+          "台灣汽車駕照正本（駕駛本人必帶，不可過期）",
+          "台灣汽車駕照日文譯本（監理所申辦，必帶正本）",
+          "全家人護照正本（有效期限需 6 個月以上）",
+          "租車確認單憑證（列印或手機 PDF 離線檔）",
+          "高額度信用卡（租車押金與加油過路費使用）",
+          "日本上網 eSIM / 實體 SIM 卡（確認漫遊開通）"
+        ]
+      },
+      {
+        category: "2Y3M 幼童極地防寒裝備",
+        items: [
+          "防水防風連身雪衣（雪地活動防滲水必備）",
+          "防滑保暖高筒雪靴（魔鬼氈好穿脫款）",
+          "保暖防寒連指防水手套（附防丟防墜繩）",
+          "護耳式毛帽 + 柔軟純棉脖圍（防冷風灌入）",
+          "純棉排汗發熱衣 3 套（室內暖氣防汗疹）",
+          "厚羊毛保暖長襪 4 雙（每天多備一雙在隨身包）"
+        ]
+      },
+      {
+        category: "幼童隨身常備藥品與護理",
+        items: [
+          "退燒藥水（安佳熱 / 依普芬小兒懸浮液）",
+          "幼兒專用耳溫槍（每日早晚量測體溫）",
+          "退熱貼 + 生理食鹽水（防鼻塞乾燥清潔）",
+          "高保濕面霜 / 凡士林（日本極乾防蘋果臉）",
+          "抗組織胺小兒感冒藥水（兒科行前門診常備）",
+          "常備透氣 OK 繃與外用小護士藥膏"
+        ]
+      },
+      {
+        category: "親子自駕旅行隨身神器",
+        items: [
+          "人體工學高承重雙肩背巾（合掌村推車無法推）",
+          "車用兒童安全座椅（已向租車公司預約確認）",
+          "象印 / 膳魔師保溫水壺（隨時提供溫水沖奶）",
+          "拋棄式圍兜 + 幼童專用餐具食物剪",
+          "長途車程專用安撫米餅零食與繪本童書",
+          "行動電源 20000mAh（低溫手機耗電極快）"
+        ]
+      }
+    ];
+
+    function initChecklist() {
+      const container = document.getElementById("interactive-checklist-container");
+      if (!container) return;
+      const saved = JSON.parse(localStorage.getItem("shirakawago_checklist_2027") || "{}");
+
+      let totalItems = 0;
+      let checkedItems = 0;
+      let html = "";
+
+      CHECKLIST_DATA.forEach((group, gIdx) => {
+        html += `<div class="interactive-check-group">
+          <div class="check-category-title">${group.category}</div>`;
+        group.items.forEach((item, iIdx) => {
+          totalItems++;
+          const key = `g${gIdx}_i${iIdx}`;
+          const isChecked = !!saved[key];
+          if (isChecked) checkedItems++;
+          html += `<label class="interactive-check-item ${isChecked ? 'done' : ''}">
+            <input type="checkbox" data-key="${key}" ${isChecked ? 'checked' : ''} onchange="toggleCheckItem(this)" />
+            <span>${item}</span>
+          </label>`;
+        });
+        html += `</div>`;
+      });
+
+      container.innerHTML = html;
+      updateChecklistProgress(checkedItems, totalItems);
+    }
+
+    function toggleCheckItem(el) {
+      const key = el.dataset.key;
+      const parent = el.closest(".interactive-check-item");
+      const saved = JSON.parse(localStorage.getItem("shirakawago_checklist_2027") || "{}");
+
+      if (el.checked) {
+        saved[key] = true;
+        parent.classList.add("done");
+      } else {
+        delete saved[key];
+        parent.classList.remove("done");
+      }
+      localStorage.setItem("shirakawago_checklist_2027", JSON.stringify(saved));
+
+      const checkboxes = document.querySelectorAll("#interactive-checklist-container input[type='checkbox']");
+      const total = checkboxes.length;
+      const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+      updateChecklistProgress(checked, total);
+    }
+
+    function updateChecklistProgress(checked, total) {
+      const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+      const bar = document.getElementById("checklist-progress");
+      const text = document.getElementById("progress-text");
+      if (bar) bar.style.width = pct + "%";
+      if (text) text.textContent = `已準備 ${checked} / ${total} 項 (${pct}%)`;
+    }
+
+    function resetChecklist() {
+      if (confirm("確定要清空所有打包勾選進度嗎？")) {
+        localStorage.removeItem("shirakawago_checklist_2027");
+        initChecklist();
+      }
+    }
+
+    // 註冊 Service Worker 離線支援
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          console.log('ServiceWorker registered:', reg.scope);
+        }).catch(err => {
+          console.log('ServiceWorker registration failed:', err);
+        });
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      initChecklist();
+    });
+
   </script>
+<div id="toast" class="toast-notification">已成功複製！</div>
 </body>
 </html>
