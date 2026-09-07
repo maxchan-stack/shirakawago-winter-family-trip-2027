@@ -985,6 +985,387 @@
       font-size: 0.86rem;
       margin-bottom: 0.35rem;
     }
+
+    /* 飄雪畫布與切換鈕 */
+    #snow-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9998;
+    }
+    .snow-toggle-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      cursor: pointer;
+      color: #1e3a8a;
+      transition: all 0.18s ease;
+      user-select: none;
+    }
+    .snow-toggle-chip:hover {
+      background: #eff6ff;
+      border-color: #2563eb;
+    }
+
+    /* 景點搜尋與快速標籤篩選器 (Search & Filter Bar) */
+    .search-filter-box {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid rgba(30, 41, 59, 0.12);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .search-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.65rem;
+    }
+    .search-input-wrap input {
+      width: 100%;
+      padding: 0.5rem 2.2rem 0.5rem 0.85rem;
+      border: 1.5px solid rgba(30, 41, 59, 0.18);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .search-input-wrap input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    .search-clear-btn {
+      position: absolute;
+      right: 0.6rem;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 0.88rem;
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+      display: none;
+    }
+    .search-clear-btn.active {
+      display: block;
+    }
+    .filter-chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+    }
+    .filter-chip {
+      appearance: none;
+      border: 1px solid rgba(30, 41, 59, 0.15);
+      background: #ffffff;
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      padding: 0.24rem 0.65rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: "Klee One", serif;
+      transition: all 0.15s ease;
+    }
+    .filter-chip:hover {
+      background: #f1f5f9;
+      color: var(--ink);
+    }
+    .filter-chip.is-active {
+      background: #1e3a8a;
+      color: #ffffff;
+      border-color: #1e3a8a;
+      box-shadow: 0 2px 6px rgba(30, 58, 138, 0.25);
+    }
+    .search-results-overlay {
+      margin-top: 0.85rem;
+      padding-top: 0.85rem;
+      border-top: 1px dashed rgba(30, 41, 59, 0.15);
+    }
+    .search-result-count {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .search-result-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    .search-result-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid rgba(30, 41, 59, 0.08);
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .search-result-item:hover {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      transform: translateX(3px);
+    }
+    .search-res-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .search-res-meta {
+      font-size: 0.74rem;
+      color: #64748b;
+    }
+    .search-res-jump {
+      font-size: 0.74rem;
+      color: #2563eb;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* 6 日氣象與 2Y3M 穿搭指南條 (Winter Weather & Clothing Strip) */
+    .weather-forecast-strip {
+      background: #ffffff;
+      border: 1.5px solid rgba(30, 41, 59, 0.12);
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .weather-strip-title {
+      font-family: "Shippori Mincho", serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .weather-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.6rem;
+    }
+    .weather-day-card {
+      background: #f8fafc;
+      border: 1px solid rgba(30, 41, 59, 0.08);
+      border-radius: 8px;
+      padding: 0.65rem 0.55rem;
+      text-align: center;
+      transition: transform 0.15s ease;
+    }
+    .weather-day-card:hover {
+      transform: translateY(-2px);
+      border-color: #93c5fd;
+      background: #ffffff;
+      box-shadow: 0 4px 10px rgba(30, 41, 59, 0.05);
+    }
+    .weather-day-card .w-day {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 0.2rem;
+    }
+    .weather-day-card .w-loc {
+      font-size: 0.72rem;
+      color: #64748b;
+      margin-bottom: 0.35rem;
+    }
+    .weather-day-card .w-temp {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .weather-day-card .w-desc {
+      font-size: 0.72rem;
+      color: #0284c7;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .weather-day-card .w-cloth {
+      font-size: 0.68rem;
+      color: #92400e;
+      background: #fef3c7;
+      padding: 2px 4px;
+      border-radius: 4px;
+      display: block;
+      line-height: 1.35;
+    }
+
+    /* 日文醫療短語朗讀按鈕 */
+    .btn-speak-ja {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      color: #991b1b;
+      border-radius: 4px;
+      padding: 0.18rem 0.45rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.25rem;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .btn-speak-ja:hover {
+      background: #fee2e2;
+      border-color: #ef4444;
+      transform: translateY(-1px);
+    }
+
+    /* 旅途支出記帳簿 (Expense Ledger) */
+    .expense-card {
+      background: #ffffff;
+      border: 1px solid rgba(30, 41, 59, 0.12);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.2rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .expense-form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0;
+    }
+    .expense-form-row input, .expense-form-row select {
+      padding: 0.42rem 0.6rem;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      font-family: inherit;
+    }
+    .expense-form-row input[type="text"] { flex: 2; min-width: 130px; }
+    .expense-form-row input[type="number"] { flex: 1; min-width: 90px; }
+    .expense-form-row select { flex: 1; min-width: 100px; background: #ffffff; }
+    .btn-add-expense {
+      padding: 0.42rem 0.95rem;
+      background: #0d9488;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: background 0.18s ease;
+    }
+    .btn-add-expense:hover { background: #0f766e; }
+    .expense-total-badge {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 0.9rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      color: #166534;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+    .expense-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+    }
+    .expense-table th, .expense-table td {
+      padding: 0.45rem 0.55rem;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+    }
+    .expense-table th {
+      color: #64748b;
+      font-weight: 600;
+      background: #f8fafc;
+    }
+    .btn-del-expense {
+      background: transparent;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 0.82rem;
+      padding: 0 0.25rem;
+    }
+
+    /* 自訂打包清單新增項目 */
+    .checklist-add-wrap {
+      display: flex;
+      gap: 0.45rem;
+      margin-top: 0.85rem;
+      padding-top: 0.85rem;
+      border-top: 1.5px dashed rgba(30, 41, 59, 0.12);
+    }
+    .checklist-add-wrap input {
+      flex: 1;
+      padding: 0.4rem 0.65rem;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-family: inherit;
+    }
+    .checklist-add-wrap button {
+      padding: 0.4rem 0.75rem;
+      background: #1e3a8a;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-del-check-item {
+      margin-left: auto;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 0 0.3rem;
+    }
+    .btn-del-check-item:hover { color: #ef4444; }
+
+    /* 地圖定位按鈕 */
+    .btn-map-locate {
+      margin-top: 0.55rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.32rem 0.75rem;
+      background: #ffffff;
+      border: 1px solid #3b82f6;
+      color: #1d4ed8;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .btn-map-locate:hover {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
     /* 回到頂部按鈕 (Back to Top) */
     .back-to-top {
       position: fixed;
@@ -1186,6 +1567,7 @@
   </style>
 </head>
 <body>
+  <canvas id="snow-canvas"></canvas>
   <div class="page">
 
     <!-- 1. 封面手帳區塊 -->
@@ -1203,6 +1585,7 @@
         <div class="meta-chip gold"><span class="dot"></span> 星宇航空 JX838 / JX839</div>
         <div class="meta-chip blue"><span class="dot"></span> 4WD雪胎自駕 · 兒童安全座椅配備</div>
         <div class="meta-chip teal"><span class="dot"></span> 家族貸切風呂 · 幼兒友善慢活節奏</div>
+        <div class="snow-toggle-chip" id="snow-toggle-btn" onclick="toggleSnow()">❄️ 飄雪動畫：<span id="snow-status-text">開啟</span></div>
       </div>
 
       <div class="cover-note">
@@ -1222,8 +1605,80 @@
       <button class="tab-btn" data-tab="guide">🎒 2Y3M生存手冊</button>
     </nav>
 
+    <!-- 景點搜尋與分類快篩條 -->
+    <div class="search-filter-box">
+      <div class="search-input-wrap">
+        <input type="text" id="itinerary-search" placeholder="🔍 搜尋全行程關鍵字：飛驒牛、溫泉、合掌村、拉車、超商、鰻魚飯..." oninput="handleSearch(this.value)" />
+        <button id="search-clear-btn" class="search-clear-btn" onclick="clearSearch()">✕</button>
+      </div>
+      <div class="filter-chip-group">
+        <button class="filter-chip is-active" data-filter="all" onclick="filterSpots('all', this)">全部景點</button>
+        <button class="filter-chip" data-filter="baby" onclick="filterSpots('baby', this)">👶 親子放電與暖房</button>
+        <button class="filter-chip" data-filter="drive" onclick="filterSpots('drive', this)">🚗 4WD雪駕行車警戒</button>
+        <button class="filter-chip" data-filter="onsen" onclick="filterSpots('onsen', this)">♨️ 名湯家族貸切風呂</button>
+        <button class="filter-chip" data-filter="food" onclick="filterSpots('food', this)">🍱 飛驒牛燒肉與名物</button>
+      </div>
+      <div id="search-results-overlay" class="search-results-overlay" style="display: none;">
+        <div id="search-result-count" class="search-result-count">搜尋結果</div>
+        <div id="search-result-list" class="search-result-list"></div>
+      </div>
+    </div>
+
     <!-- 3. TAB 1: 行程總覽與地圖 (OVERVIEW) -->
     <section class="tab-panel is-active" data-panel="overview" id="panel-overview">
+      
+      <!-- 6 日氣候概況與穿搭指南條 -->
+      <div class="weather-forecast-strip">
+        <div class="weather-strip-title">
+          <span>❄️ 2027 冬季氣象預報與 2Y3M 極地穿搭對策</span>
+          <span style="font-size: 0.76rem; font-weight: normal; color: #64748b;">氣象廳歷史均溫與深冬對策</span>
+        </div>
+        <div class="weather-grid">
+          <div class="weather-day-card">
+            <div class="w-day">D1 · 1/21 (四)</div>
+            <div class="w-loc">名古屋名站</div>
+            <div class="w-temp">2°C ~ 9°C</div>
+            <div class="w-desc">晴時多雲 · 乾爽</div>
+            <span class="w-cloth">厚毛衣 + 鋪棉大衣</span>
+          </div>
+          <div class="weather-day-card">
+            <div class="w-day">D2 · 1/22 (五)</div>
+            <div class="w-loc">郡上 ➔ 飛驒高山</div>
+            <div class="w-temp">-2°C ~ 4°C</div>
+            <div class="w-desc">陰轉小雪 · 結冰</div>
+            <span class="w-cloth">防風外套 + 雪靴毛帽</span>
+          </div>
+          <div class="weather-day-card" style="border-color: #3b82f6; background: #eff6ff;">
+            <div class="w-day">D3 · 1/23 (六)</div>
+            <div class="w-loc">白川鄉合掌村</div>
+            <div class="w-temp">-4°C ~ 1°C</div>
+            <div class="w-desc">降雪率 80% · 極寒</div>
+            <span class="w-cloth" style="background: #fecaca; color: #991b1b;">防水連身雪衣 + 防水手套</span>
+          </div>
+          <div class="weather-day-card">
+            <div class="w-day">D4 · 1/24 (日)</div>
+            <div class="w-loc">宮川朝市 ➔ 下呂</div>
+            <div class="w-temp">-1°C ~ 6°C</div>
+            <div class="w-desc">晨間微雪 · 峽谷冰</div>
+            <span class="w-cloth">純棉發熱衣 + 雙層長襪</span>
+          </div>
+          <div class="weather-day-card">
+            <div class="w-day">D5 · 1/25 (一)</div>
+            <div class="w-loc">下呂 ➔ 名古屋榮</div>
+            <div class="w-temp">2°C ~ 9°C</div>
+            <div class="w-desc">晴朗 · 溫泉熱氣</div>
+            <span class="w-cloth">好穿脫外套（室內暖氣）</span>
+          </div>
+          <div class="weather-day-card">
+            <div class="w-day">D6 · 1/26 (二)</div>
+            <div class="w-loc">常滑 ➔ 中部機場</div>
+            <div class="w-temp">4°C ~ 11°C</div>
+            <div class="w-desc">晴朗海風 · 航廈暖</div>
+            <span class="w-cloth">洋蔥式穿法方便登機</span>
+          </div>
+        </div>
+      </div>
+
       <div class="ov-grid">
         <div class="ov-card" onclick="switchDay('d1')">
           <div class="ov-day">D1 · 1/21 (四) 出發與抵達</div>
@@ -1260,8 +1715,10 @@
       <!-- 互動 Leaflet 地圖 -->
       <div class="map-container">
         <div class="map-title">🗾 2027 昇龍道雪境親子自駕路線圖</div>
-        <div class="map-sub">名古屋 ➔ 郡上八幡 ➔ 飛驒高山 ➔ 白川鄉合掌村 ➔ 下呂溫泉 ➔ 中部國際機場</div>
         <div id="interactive-map"></div>
+        <div style="text-align: right; margin-top: 0.55rem;">
+          <button class="btn-map-locate" onclick="locateUserOnMap()">📍 GPS 定位我目前位置</button>
+        </div>
       </div>
     </section>
 
@@ -2105,6 +2562,49 @@
         </div>
       </div>
 
+      <!-- 旅途支出即時記帳簿 -->
+      <div class="expense-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem;">
+          <h3 style="font-size: 1.02rem; color: var(--forest-pine);">旅途支出即時記帳簿（雙幣別統計）</h3>
+          <button onclick="resetExpenses()" style="background: transparent; border: none; font-size: 0.74rem; color: #ef4444; cursor: pointer;">清空全部記帳</button>
+        </div>
+        <p style="font-size: 0.78rem; color: #64748b; margin-top: 0.2rem;">離線自動保存於手機，每筆消費自動以即時匯率換算台幣：</p>
+        
+        <div class="expense-form-row">
+          <input type="text" id="expense-name" placeholder="項目（如：飛驒牛燒肉、合掌村門票）" />
+          <input type="number" id="expense-amount" placeholder="金額 (JPY ¥)" />
+          <select id="expense-cat">
+            <option value="🍽️ 餐飲美食">🍽️ 餐飲美食</option>
+            <option value="🚗 交通加油">🚗 交通加油</option>
+            <option value="🎟️ 門票活動">🎟️ 門票活動</option>
+            <option value="🛍️ 伴手購物">🛍️ 伴手購物</option>
+            <option value="🏨 住宿溫泉">🏨 住宿溫泉</option>
+          </select>
+          <button class="btn-add-expense" onclick="addExpense()">＋ 記一筆</button>
+        </div>
+
+        <div id="expense-total-badge" class="expense-total-badge">
+          <span>累計花費總額</span>
+          <span>¥ 0（約 NT$ 0）</span>
+        </div>
+
+        <div style="overflow-x: auto; max-height: 240px;">
+          <table class="expense-table">
+            <thead>
+              <tr>
+                <th>消費項目</th>
+                <th>日圓 (JPY)</th>
+                <th>折合台幣 (TWD)</th>
+                <th style="text-align: right;">操作</th>
+              </tr>
+            </thead>
+            <tbody id="expense-list">
+              <!-- 由 JavaScript 動態生成 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- 緊急小兒醫療救護卡 -->
       <div class="emergency-banner">
         <h3>小兒急病與緊急醫療救護支援卡</h3>
@@ -2125,19 +2625,37 @@
 
         <div class="med-phrases">
           <div style="font-weight: 700; font-size: 0.78rem; color: #991b1b; margin-bottom: 0.4rem;">
-            緊急狀況直接出示給飯店櫃檯或醫護人員字卡：
+            緊急狀況直接出示給飯店櫃檯或醫護人員字卡（點擊按鈕可由手機日語發音朗讀）：
           </div>
           <div class="med-phrase-item">
             <span class="ja">「子供が急に高熱を出しました。2歳3ヶ月です。」</span>
             <span class="zh">（小孩突然發高燒，年齡為 2 歲 3 個月。）</span>
+            <div><button class="btn-speak-ja" onclick="speakJapanese('子供が急に高熱を出しました。2歳3ヶ月です。')">🔊 語音朗讀</button></div>
           </div>
           <div class="med-phrase-item">
             <span class="ja">「熱性けいれんの疑いがあります。救急車をお願いします。」</span>
             <span class="zh">（疑似出現熱痙攣抽搐症狀，請立刻協助叫救護車。）</span>
+            <div><button class="btn-speak-ja" onclick="speakJapanese('熱性けいれんの疑いがあります。救急車をお願いします。')">🔊 語音朗讀</button></div>
           </div>
           <div class="med-phrase-item">
             <span class="ja">「子供が雪道で滑って頭を打ちました。」</span>
             <span class="zh">（孩子在雪地滑倒碰撞到頭部。）</span>
+            <div><button class="btn-speak-ja" onclick="speakJapanese('子供が雪道で滑って頭を打ちました。')">🔊 語音朗讀</button></div>
+          </div>
+          <div class="med-phrase-item">
+            <span class="ja">「子供が激しく嘔吐し、水分が取れません。」</span>
+            <span class="zh">（小孩劇烈嘔吐，無法攝取水分。）</span>
+            <div><button class="btn-speak-ja" onclick="speakJapanese('子供が激しく嘔吐し、水分が取れません。')">🔊 語音朗讀</button></div>
+          </div>
+          <div class="med-phrase-item">
+            <span class="ja">「薬のアレルギーはありません。」</span>
+            <span class="zh">（無藥物過敏史。）</span>
+            <div><button class="btn-speak-ja" onclick="speakJapanese('薬のアレルギーはありません。')">🔊 語音朗讀</button></div>
+          </div>
+          <div class="med-phrase-item">
+            <span class="ja">「日本の海外旅行医療保険に加入しています。」</span>
+            <span class="zh">（已投保日本海外旅行醫療保險。）</span>
+            <div><button class="btn-speak-ja" onclick="speakJapanese('日本の海外旅行医療保険に加入しています。')">🔊 語音朗讀</button></div>
           </div>
         </div>
 
@@ -2225,6 +2743,12 @@
 
         <div id="interactive-checklist-container">
           <!-- 由 JavaScript 動態渲染並綁定 localStorage -->
+        </div>
+
+        <!-- 自訂裝備新增列 -->
+        <div class="checklist-add-wrap">
+          <input type="text" id="custom-check-input" placeholder="＋ 新增自訂裝備（如：特定奶粉廠牌、安撫娃娃、保溫瓶刷...）" />
+          <button onclick="addCustomCheckItem()">新增項目</button>
         </div>
       </div>
 
@@ -2442,10 +2966,316 @@
       }
     ];
 
+    // 景點與時段索引資料庫（用於關鍵字搜尋與標籤快篩）
+    const SPOTS_INDEX = [
+      { day: 'd1', dayName: 'D1 · 抵達名站', time: '14:20', place: '星宇航空 JX838 航班（TPE ➔ NGO）', desc: '星宇航空 A330neo / A350 商務艙舒適出航，專屬嬰兒掛籃與兒童玩具包。', tags: ['baby'] },
+      { day: 'd1', dayName: 'D1 · 抵達名站', time: '18:50', place: '中部國際機場 ➔ 名鐵名古屋站', desc: '搭乘名鐵 μ-SKY 特急列車直達名站，全程 28 分鐘，全車指定席放推車與行李無壓力。', tags: ['drive'] },
+      { day: 'd1', dayName: 'D1 · 抵達名站', time: '20:00', place: '入住名古屋 JR 門樓飯店 / 萬豪飯店', desc: '名站上方垂直共構電梯直通飯店大廳，免出站吹風受凍。高樓層遠眺名站鐵道夜景。', tags: ['baby'] },
+      { day: 'd2', dayName: 'D2 · 郡上高山', time: '09:00', place: '名古屋站前租車據點取車', desc: '預約 4WD 四輪驅動 SUV，雪胎配備、全新幼兒安全座椅完成安裝，工作人員指導雪地操作。', tags: ['drive'] },
+      { day: 'd2', dayName: 'D2 · 郡上高山', time: '11:00', place: '郡上八幡散策 · 食品模型工房 samplekobo', desc: '食品模型之鄉，參觀超逼真天婦羅、壽司模型與古老街町，幼童眼球大放電。', tags: ['baby', 'food'] },
+      { day: 'd2', dayName: 'D2 · 郡上高山', time: '13:00', place: '郡上八幡 ➔ 飛驒高山行車（行車約 75 分鐘）', desc: '東海北陸自動車道進入雪白山岳隧道群，配合幼童午睡拉車至高山。', tags: ['drive'] },
+      { day: 'd2', dayName: 'D2 · 郡上高山', time: '15:00', place: '入住高山 Green Hotel / 飛驒高山老街黃昏步道', desc: '老街江戶古建築木造町家，品嚐飛驒牛握壽司與烤仙貝，黃昏雪地暖燈如置身繪本。', tags: ['baby', 'onsen', 'food'] },
+      { day: 'd3', dayName: 'D3 · 合掌村雪景', time: '09:30', place: '飛驒高山出發 ➔ 白川鄉合掌村', desc: '行駛國道與飛驒清見交流道，約 50 分鐘車程直達荻町白川鄉合掌造聚落。', tags: ['drive'] },
+      { day: 'd3', dayName: 'D3 · 合掌村雪景', time: '10:30', place: '合掌造村落漫步 · 和田家內部參觀 · 相逢橋拍照', desc: '童話薑餅屋聚落，造訪和田家參觀傳統茅草民家大木樑，相逢橋俯瞰積雪清澈河道。', tags: ['baby'] },
+      { day: 'd3', dayName: 'D3 · 合掌村雪景', time: '13:30', place: '白川鄉荻町城山天守閣展望台 ➔ 返回高山市區', desc: '俯瞰全村茅草合掌造童話雪景最佳位置，專用接駁車直達天守閣，避免爬陡峭坡道。', tags: ['baby', 'drive'] },
+      { day: 'd3', dayName: 'D3 · 合掌村雪景', time: '16:00', place: '高山飯店溫泉休整 · 高山特產飛驒牛壽司與燒肉', desc: '午後返回高山市區泡湯暖身，晚餐品嚐炭火烤飛驒牛 A5 燒肉與熱呼呼鄉土朴葉味噌。', tags: ['onsen', 'food'] },
+      { day: 'd4', dayName: 'D4 · 昭和館下呂', time: '09:00', place: '高山宮川朝市晨間漫步', desc: '日本三大朝市之一，沿宮川河畔採購當季香甜飛驒蘋果、高山草莓、地酒與木雕手作。', tags: ['food'] },
+      { day: 'd4', dayName: 'D4 · 昭和館下呂', time: '10:30', place: '高山陣屋散策 · 高山昭和館童玩體驗', desc: '高山昭和館室內重現日本昭和年代復古雜貨鋪與童玩，幼童可在室內溫暖遊戲區盡情互動。', tags: ['baby'] },
+      { day: 'd4', dayName: 'D4 · 昭和館下呂', time: '13:15', place: '高山 ➔ 下呂溫泉（行車約 70 分鐘）', desc: '沿國道 41 號南下，飛驒川溪谷美景，趁寶寶午睡平穩駛抵下呂溫泉鄉。', tags: ['drive'] },
+      { day: 'd4', dayName: 'D4 · 昭和館下呂', time: '15:00', place: '入住下呂溫泉頂級旅館（水明館 / 湯之島館）', desc: '日本三大名湯，美人之湯鹼性純泉，預約家族專屬貸切湯屋，一家三口共享隱私露天風呂。', tags: ['onsen', 'baby'] },
+      { day: 'd5', dayName: 'D5 · 返名古屋', time: '10:00', place: '下呂溫泉街 · 白鷺之湯 · 下呂布丁', desc: '早晨在溫泉街悠閒散策，泡白鷺足湯，品嚐在地名物下呂溫泉布丁。', tags: ['onsen', 'food'] },
+      { day: 'd5', dayName: 'D5 · 返名古屋', time: '11:45', place: '下呂出發 ➔ 名古屋市區（行車約 2 小時）', desc: '離開山區重返名古屋平地，道路無積雪。市區行車注意塞車，預留加油時間。', tags: ['drive'] },
+      { day: 'd5', dayName: 'D5 · 返名古屋', time: '14:00', place: '名古屋市區歸還租車 ➔ 入住榮町商圈飯店', desc: '於市區加油站加滿油後完成還車手續，解除雪地自駕任務！步行入住榮町精品飯店。', tags: ['drive'] },
+      { day: 'd5', dayName: 'D5 · 返名古屋', time: '15:30', place: '阿卡將母嬰採購 · 久屋大通公園 · 綠洲 21 水之宇宙船', desc: '松坂屋百貨阿卡將採購日本童裝與母嬰用品，傍晚至綠洲 21 水之宇宙船漫步眺望名古屋電視塔。', tags: ['baby'] },
+      { day: 'd5', dayName: 'D5 · 返名古屋', time: '18:30', place: '晚餐 · 熱田蓬萊軒（松坂屋店）炭烤鰻魚飯三吃', desc: '松坂屋南館 10F 蓬萊軒，三種吃法層次豐富，店內備有完備兒童座椅與幼兒餐具。', tags: ['food', 'baby'] },
+      { day: 'd6', dayName: 'D6 · 機場返台', time: '09:30', place: '磁浮鐵道館（Scmaglev and Railway Park）', desc: '展示真實新幹線與超導磁浮列車實機，室內設有超大型鐵道模型運轉台與幼兒遊戲育嬰室。', tags: ['baby'] },
+      { day: 'd6', dayName: 'D6 · 機場返台', time: '13:00', place: '名古屋市區 ➔ 中部國際機場（NGO）', desc: '搭乘名鐵特急或自駕直通中部機場，交通順暢無阻。', tags: ['drive'] },
+      { day: 'd6', dayName: 'D6 · 機場返台', time: '14:00', place: '常滑巨型招財貓 ＆ FLIGHT OF DREAMS（波音 787 實機公園）', desc: '常滑陶藝散步道眺望巨大招財貓 Tokonyan，第二航廈波音 787 客機展區放電互動。', tags: ['baby'] },
+      { day: 'd6', dayName: 'D6 · 機場返台', time: '17:40', place: '星宇航空報到 ➔ 返抵台灣（TPE）', desc: '星宇航空 JX839 航班順利起飛，帶著滿滿雪景回憶與特產禮盒返抵台灣。', tags: ['baby'] }
+    ];
+
+    let currentFilter = 'all';
+
+    function handleSearch(query) {
+      const clearBtn = document.getElementById("search-clear-btn");
+      const overlay = document.getElementById("search-results-overlay");
+      const countEl = document.getElementById("search-result-count");
+      const listEl = document.getElementById("search-result-list");
+
+      if (clearBtn) clearBtn.classList.toggle("active", !!query);
+
+      const q = query.trim().toLowerCase();
+      if (!q && currentFilter === 'all') {
+        if (overlay) overlay.style.display = "none";
+        return;
+      }
+
+      let matches = SPOTS_INDEX.filter(item => {
+        const matchTag = (currentFilter === 'all') || item.tags.includes(currentFilter);
+        const matchText = !q || item.place.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q) || item.dayName.toLowerCase().includes(q);
+        return matchTag && matchText;
+      });
+
+      if (overlay) overlay.style.display = "block";
+      if (countEl) countEl.textContent = `找到 ${matches.length} 個符合行程：`;
+      if (listEl) {
+        if (matches.length === 0) {
+          listEl.innerHTML = `<div style="color: #94a3b8; font-size: 0.8rem; padding: 0.5rem 0;">無相符景點，請嘗試其他關鍵字</div>`;
+        } else {
+          listEl.innerHTML = matches.map(m => `
+            <div class="search-result-item" onclick="jumpToSpot('${m.day}', '${m.place}')">
+              <div>
+                <div class="search-res-title">${m.place}</div>
+                <div class="search-res-meta">${m.dayName} ｜ ${m.time}</div>
+              </div>
+              <span class="search-res-jump">跳轉行程 →</span>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    function clearSearch() {
+      const input = document.getElementById("itinerary-search");
+      if (input) input.value = "";
+      handleSearch("");
+    }
+
+    function filterSpots(category, btn) {
+      currentFilter = category;
+      document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("is-active"));
+      if (btn) btn.classList.add("is-active");
+      const input = document.getElementById("itinerary-search");
+      handleSearch(input ? input.value : "");
+    }
+
+    function jumpToSpot(day, placeName) {
+      switchDay(day);
+      clearSearch();
+      setTimeout(() => {
+        const places = document.querySelectorAll(".place");
+        for (const p of places) {
+          if (p.textContent.includes(placeName) || placeName.includes(p.textContent)) {
+            p.scrollIntoView({ behavior: "smooth", block: "center" });
+            const slot = p.closest(".slot");
+            if (slot) {
+              slot.style.transition = "background-color 0.4s ease";
+              slot.style.backgroundColor = "rgba(254, 240, 138, 0.65)";
+              setTimeout(() => {
+                slot.style.backgroundColor = "";
+              }, 2200);
+            }
+            break;
+          }
+        }
+      }, 350);
+    }
+
+    // 輕量雪景飄雪微動畫 (Ambient Snowfall Canvas)
+    let snowAnimationId = null;
+    let snowEnabled = localStorage.getItem('shirakawago_snow_enabled') !== 'false';
+
+    function initSnowfall() {
+      const canvas = document.getElementById('snow-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) {
+        snowEnabled = false;
+      }
+      updateSnowUI();
+
+      const flakes = [];
+      const flakeCount = Math.min(38, Math.floor(window.innerWidth / 32));
+      for (let i = 0; i < flakeCount; i++) {
+        flakes.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 2.2 + 1,
+          d: Math.random() * flakeCount,
+          speed: Math.random() * 0.65 + 0.35,
+          opacity: Math.random() * 0.45 + 0.25
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (!snowEnabled) return;
+        
+        flakes.forEach(f => {
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(255, 255, 255, ${f.opacity})`;
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+          ctx.fill();
+
+          f.y += f.speed;
+          f.x += Math.sin(f.d) * 0.35;
+          f.d += 0.01;
+
+          if (f.y > canvas.height) {
+            f.y = -5;
+            f.x = Math.random() * canvas.width;
+          }
+          if (f.x > canvas.width + 5) f.x = -5;
+          else if (f.x < -5) f.x = canvas.width + 5;
+        });
+
+        snowAnimationId = requestAnimationFrame(draw);
+      }
+
+      if (snowEnabled) {
+        draw();
+      }
+    }
+
+    function toggleSnow() {
+      snowEnabled = !snowEnabled;
+      localStorage.setItem('shirakawago_snow_enabled', snowEnabled);
+      updateSnowUI();
+      const canvas = document.getElementById('snow-canvas');
+      if (snowEnabled) {
+        initSnowfall();
+        showToast('已開啟雪境飄雪動畫');
+      } else {
+        if (snowAnimationId) cancelAnimationFrame(snowAnimationId);
+        if (canvas) {
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        showToast('已暫停雪境飄雪動畫');
+      }
+    }
+
+    function updateSnowUI() {
+      const text = document.getElementById('snow-status-text');
+      if (text) text.textContent = snowEnabled ? '開啟' : '關閉';
+    }
+
+    // 日語語音合成朗讀 (Web Speech API)
+    function speakJapanese(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast('您的裝置不支援語音合成發音');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ja-JP';
+      utterance.rate = 0.85;
+      window.speechSynthesis.speak(utterance);
+      showToast('正在以日語發音朗讀：' + text.substring(0, 16) + '...');
+    }
+
+    // 旅途支出記帳簿邏輯
+    let expenses = JSON.parse(localStorage.getItem('shirakawago_expenses_2027') || '[]');
+
+    function initExpenses() {
+      const list = document.getElementById('expense-list');
+      const totalBadge = document.getElementById('expense-total-badge');
+      if (!list || !totalBadge) return;
+
+      let totalJpy = 0;
+      if (expenses.length === 0) {
+        list.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #94a3b8; padding: 1rem;">尚無支出紀錄，請於上方新增消費項目</td></tr>';
+      } else {
+        let html = '';
+        expenses.forEach((item, idx) => {
+          totalJpy += item.amount;
+          const twd = Math.round(item.amount * DEFAULT_RATE);
+          html += `<tr>
+            <td><strong>${item.name}</strong><br><span style="color:#94a3b8; font-size: 0.72rem;">${item.category}</span></td>
+            <td>¥${item.amount.toLocaleString()}</td>
+            <td>NT$ ${twd.toLocaleString()}</td>
+            <td style="text-align: right;"><button class="btn-del-expense" onclick="deleteExpense(${idx})" title="刪除此筆">✕</button></td>
+          </tr>`;
+        });
+        list.innerHTML = html;
+      }
+      const totalTwd = Math.round(totalJpy * DEFAULT_RATE);
+      totalBadge.innerHTML = `<span>累計花費總額</span><span>¥ ${totalJpy.toLocaleString()}（約 NT$ ${totalTwd.toLocaleString()}）</span>`;
+    }
+
+    function addExpense() {
+      const nameInput = document.getElementById('expense-name');
+      const amountInput = document.getElementById('expense-amount');
+      const catInput = document.getElementById('expense-cat');
+      if (!nameInput || !amountInput) return;
+      const name = nameInput.value.trim();
+      const amount = parseInt(amountInput.value, 10);
+      const category = catInput ? catInput.value : '🍽️ 餐飲美食';
+      if (!name) {
+        showToast('請輸入消費項目名稱');
+        return;
+      }
+      if (!amount || amount <= 0) {
+        showToast('請輸入有效日幣金額');
+        return;
+      }
+      expenses.unshift({ name, amount, category, date: new Date().toLocaleDateString() });
+      localStorage.setItem('shirakawago_expenses_2027', JSON.stringify(expenses));
+      nameInput.value = '';
+      amountInput.value = '';
+      initExpenses();
+      showToast(`已記帳：${name} ¥${amount.toLocaleString()}`);
+    }
+
+    function deleteExpense(idx) {
+      if (confirm('確定要刪除這筆支出嗎？')) {
+        expenses.splice(idx, 1);
+        localStorage.setItem('shirakawago_expenses_2027', JSON.stringify(expenses));
+        initExpenses();
+        showToast('已刪除該筆支出');
+      }
+    }
+
+    function resetExpenses() {
+      if (confirm('確定要清空所有旅途記帳紀錄嗎？')) {
+        expenses = [];
+        localStorage.removeItem('shirakawago_expenses_2027');
+        initExpenses();
+        showToast('已清空所有記帳紀錄');
+      }
+    }
+
+    // GPS 地圖定位邏輯
+    function locateUserOnMap() {
+      if (!navigator.geolocation) {
+        showToast('您的裝置不支援 GPS 定位');
+        return;
+      }
+      showToast('正在連線 GPS 取得衛星定位...');
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          const { latitude, longitude } = pos.coords;
+          if (window.tripMap) {
+            window.tripMap.setView([latitude, longitude], 12);
+            if (window.userLocMarker) {
+              window.tripMap.removeLayer(window.userLocMarker);
+            }
+            window.userLocMarker = L.marker([latitude, longitude]).addTo(window.tripMap)
+              .bindPopup('<b>📍 您目前的位置</b><br>緯度：' + latitude.toFixed(4) + ' 經度：' + longitude.toFixed(4)).openPopup();
+            showToast('已成功定位目前位置！');
+          }
+        },
+        err => {
+          showToast('定位失敗：' + err.message);
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    }
+
     function initChecklist() {
       const container = document.getElementById("interactive-checklist-container");
       if (!container) return;
       const saved = JSON.parse(localStorage.getItem("shirakawago_checklist_2027") || "{}");
+      const customItems = JSON.parse(localStorage.getItem("shirakawago_custom_items_2027") || "[]");
 
       let totalItems = 0;
       let checkedItems = 0;
@@ -2467,8 +3297,49 @@
         html += `</div>`;
       });
 
+      if (customItems.length > 0) {
+        html += `<div class="interactive-check-group">
+          <div class="check-category-title" style="border-color: #f59e0b; color: #b45309;">🌟 自訂攜帶與採購備品</div>`;
+        customItems.forEach((cItem, cIdx) => {
+          totalItems++;
+          const key = `custom_${cIdx}`;
+          const isChecked = !!saved[key];
+          if (isChecked) checkedItems++;
+          html += `<label class="interactive-check-item ${isChecked ? 'done' : ''}">
+            <input type="checkbox" data-key="${key}" ${isChecked ? 'checked' : ''} onchange="toggleCheckItem(this)" />
+            <span>${cItem}</span>
+            <button class="btn-del-check-item" onclick="deleteCustomCheckItem(${cIdx})" title="刪除此項">✕</button>
+          </label>`;
+        });
+        html += `</div>`;
+      }
+
       container.innerHTML = html;
       updateChecklistProgress(checkedItems, totalItems);
+    }
+
+    function addCustomCheckItem() {
+      const input = document.getElementById("custom-check-input");
+      if (!input) return;
+      const val = input.value.trim();
+      if (!val) {
+        showToast("請輸入自訂裝備名稱");
+        return;
+      }
+      const custom = JSON.parse(localStorage.getItem("shirakawago_custom_items_2027") || "[]");
+      custom.push(val);
+      localStorage.setItem("shirakawago_custom_items_2027", JSON.stringify(custom));
+      input.value = "";
+      initChecklist();
+      showToast("已新增自訂裝備：" + val);
+    }
+
+    function deleteCustomCheckItem(idx) {
+      const custom = JSON.parse(localStorage.getItem("shirakawago_custom_items_2027") || "[]");
+      custom.splice(idx, 1);
+      localStorage.setItem("shirakawago_custom_items_2027", JSON.stringify(custom));
+      initChecklist();
+      showToast("已移除該自訂裝備");
     }
 
     function toggleCheckItem(el) {
@@ -2519,6 +3390,8 @@
 
     window.addEventListener("DOMContentLoaded", () => {
       initChecklist();
+      initSnowfall();
+      initExpenses();
 
       // 回到頂部按鈕邏輯
       const backToTopBtn = document.getElementById("btn-back-to-top");
