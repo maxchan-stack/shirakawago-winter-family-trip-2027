@@ -1,4 +1,4 @@
-const CACHE_NAME = 'shirakawago-v1';
+const CACHE_NAME = 'shirakawago-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
