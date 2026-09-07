@@ -602,8 +602,8 @@
       gap: 0.45rem;
       margin: 0.65rem 0 0.5rem 0;
       padding: 0.45rem 0.65rem;
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(59, 130, 246, 0.22);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(59, 130, 246, 0.24);
       border-radius: 8px;
       font-size: 0.78rem;
     }
@@ -620,6 +620,7 @@
       font-size: 0.74rem;
       letter-spacing: 0.02em;
       transition: background 0.18s ease, transform 0.18s ease;
+      white-space: nowrap;
     }
     .btn-nav-gmap:hover {
       background: #2563eb;
@@ -645,11 +646,13 @@
       cursor: pointer;
       user-select: none;
       transition: all 0.15s ease;
+      white-space: nowrap;
     }
     .nav-code-pill:hover {
-      background: #f1f5f9;
+      background: #f8fafc;
       border-color: #3b82f6;
       color: #1d4ed8;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     }
     .nav-code-pill .code-label {
       font-size: 0.64rem;
@@ -659,11 +662,201 @@
       background: #e2e8f0;
       border-radius: 3px;
     }
+    .nav-code-pill.p-pill {
+      border-color: rgba(16, 185, 129, 0.35);
+      background: #f0fdf4;
+    }
+    .nav-code-pill.p-pill:hover {
+      border-color: #059669;
+      background: #dcfce7;
+      color: #065f46;
+    }
+    .nav-code-pill.p-pill .code-label {
+      background: #059669;
+      color: #ffffff;
+    }
+    .nav-code-pill.gps-pill {
+      border-color: rgba(147, 51, 234, 0.28);
+      background: #faf5ff;
+    }
+    .nav-code-pill.gps-pill:hover {
+      border-color: #9333ea;
+      background: #f3e8ff;
+      color: #6b21a8;
+    }
+    .nav-code-pill.gps-pill .code-label {
+      background: #7c3aed;
+      color: #ffffff;
+    }
     .nav-code-pill .copy-hint {
-      font-size: 0.66rem;
+      font-size: 0.64rem;
       color: #2563eb;
-      opacity: 0.88;
+      opacity: 0.78;
       margin-left: 2px;
+    }
+
+    /* ========== 全景點導航代號速查總表 ========== */
+    .navi-cheatsheet-section {
+      margin-top: 1.75rem;
+      background: #ffffff;
+      border: 1px solid rgba(30, 41, 59, 0.12);
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+    .navi-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .navi-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .navi-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+    .navi-subtitle {
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+    .navi-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .navi-search-input {
+      padding: 0.4rem 0.75rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      min-width: 220px;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+    .navi-search-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+    }
+    .btn-navi-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #334155;
+      transition: all 0.15s ease;
+    }
+    .btn-navi-action:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    .navi-table-wrap {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .navi-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    .navi-table th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      padding: 0.65rem 0.8rem;
+      border-bottom: 2px solid #cbd5e1;
+      white-space: nowrap;
+    }
+    .navi-table td {
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
+    .navi-table tbody tr:nth-child(even) {
+      background: #f8fafc;
+    }
+    .navi-table tbody tr:hover {
+      background: #f0fdf4;
+    }
+    .navi-col-day {
+      white-space: nowrap;
+      font-weight: 700;
+      color: #1e3a8a;
+      font-size: 0.78rem;
+    }
+    .navi-col-name {
+      font-weight: 600;
+      color: #0f172a;
+      min-width: 160px;
+    }
+    .navi-cell-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.76rem;
+      white-space: nowrap;
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      display: inline-block;
+      transition: all 0.15s ease;
+    }
+    .navi-cell-code:hover {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0284c7;
+    }
+    .navi-cell-pcode {
+      background: #f0fdf4;
+      border-color: #86efac;
+      color: #15803d;
+      font-weight: 600;
+    }
+    .navi-cell-pcode:hover {
+      background: #dcfce7;
+      border-color: #22c55e;
+      color: #166534;
+    }
+    .navi-col-note {
+      font-size: 0.76rem;
+      color: #475569;
+      min-width: 220px;
+      line-height: 1.4;
+    }
+    .btn-table-copy {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.72rem;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #2563eb;
+      cursor: pointer;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .btn-table-copy:hover {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
     }
 
     /* 複製提示 Toast */
@@ -1517,8 +1710,21 @@
       .nav-code-pill .copy-hint,
       .converter-inputs,
       #checklist-progress,
-      .progress-bar-bg {
+      .progress-bar-bg,
+      .navi-controls,
+      .btn-table-copy {
         display: none !important;
+      }
+      .navi-cheatsheet-section {
+        border: 1px solid #333 !important;
+        box-shadow: none !important;
+        break-after: page;
+        page-break-after: always;
+      }
+      .navi-table th, .navi-table td {
+        border: 1px solid #999 !important;
+        padding: 4px 6px !important;
+        font-size: 8pt !important;
       }
       .page {
         max-width: 100% !important;
@@ -1720,6 +1926,303 @@
           <button class="btn-map-locate" onclick="locateUserOnMap()">📍 GPS 定位我目前位置</button>
         </div>
       </div>
+
+      <!-- 全景點導航代號速查總表 (Master Navi Cheatsheet) -->
+      <div class="navi-cheatsheet-section" id="navi-cheatsheet">
+        <div class="navi-header">
+          <div class="navi-header-left">
+            <div class="navi-title">全景點導航定位代號速查總表</div>
+            <div class="navi-subtitle">涵蓋日本車載導航（電話 / MapCode）、自駕專用停車場代號（P-MC）與智慧手機經緯度座標（GPS）</div>
+          </div>
+          <div class="navi-controls">
+            <input type="text" id="navi-table-search" class="navi-search-input" placeholder="篩選代號總表：合掌村、停車場、飯店..." oninput="filterNaviTable(this.value)" />
+            <button class="btn-navi-action" onclick="window.print()" title="單頁列印此速查表格，供車上紙本備用">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
+              列印速查總表
+            </button>
+          </div>
+        </div>
+
+        <div class="navi-table-wrap">
+          <table class="navi-table" id="master-navi-table">
+            <thead>
+              <tr>
+                <th style="width: 55px;">天數</th>
+                <th>景點與中繼設施名稱</th>
+                <th>車載電話（TEL）</th>
+                <th>景點 MapCode（MC）</th>
+                <th>停車場 MapCode（P-MC）</th>
+                <th>手機經緯度（GPS）</th>
+                <th>自駕停車指引與避坑提醒</th>
+                <th style="width: 65px; text-align: center;">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Day 1 -->
+              <tr data-keyword="桃園國際機場 星宇航空 出發 T1 航廈">
+                <td class="navi-col-day">D1</td>
+                <td class="navi-col-name">桃園國際機場 第一航廈</td>
+                <td><span class="navi-cell-code" onclick="copyText('03-273-5000', '桃機代表號')">03-273-5000</span></td>
+                <td><span style="color: #94a3b8; font-size: 0.75rem;">台灣出發</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('25.0797, 121.2342', '桃機 P1/P2 停車場 GPS')">25.0797, 121.2342</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('25.0797, 121.2342', '桃機 GPS 座標')">25.0797, 121.2342</span></td>
+                <td class="navi-col-note">星宇 JX838 航班出發航廈，提供親子優先報到與推車托運手續。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="中部國際機場 名鐵 名古屋 新特麗亞 Centrair">
+                <td class="navi-col-day">D1</td>
+                <td class="navi-col-name">中部國際機場 第 1 航廈</td>
+                <td><span class="navi-cell-code" onclick="copyText('0569-38-1195', '中部機場電話')">0569-38-1195</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('371 857 064*22', '中部機場 MapCode')">371 857 064*22</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('371 827 825*44', '機場 P1 停車場 MapCode')">371 827 825*44</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('34.8584, 136.8125', '中部機場 GPS 座標')">34.8584, 136.8125</span></td>
+                <td class="navi-col-note">出關後前往交通廣場搭乘名鐵 μ-SKY 特急，亦可接立體停車場連通道。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="名古屋 JR 門樓飯店 萬豪飯店 JR Gate Tower Marriott">
+                <td class="navi-col-day">D1</td>
+                <td class="navi-col-name">名古屋 JR 門樓飯店 / 萬豪</td>
+                <td><span class="navi-cell-code" onclick="copyText('052-566-2111', '門樓飯店電話')">052-566-2111</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('4 316 023*14', '門樓飯店 MapCode')">4 316 023*14</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('4 316 052*71', '門樓飯店地下停車場 MapCode')">4 316 052*71</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.1713, 136.8833', '門樓飯店 GPS 座標')">35.1713, 136.8833</span></td>
+                <td class="navi-col-note">JR 名古屋站共構直通免吹冷風；地下設有機械與平面特約收費停車場。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+
+              <!-- Day 2 -->
+              <tr data-keyword="名古屋站前 租車 取車 Toyota Times 雪胎 4WD">
+                <td class="navi-col-day">D2</td>
+                <td class="navi-col-name">Toyota 租車 名古屋站新幹線口店</td>
+                <td><span class="navi-cell-code" onclick="copyText('052-452-0100', '租車門市電話')">052-452-0100</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('4 315 298*71', '租車門市 MapCode')">4 315 298*71</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('4 315 328*44', '太閣通口還車專用道 MapCode')">4 315 328*44</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.1694, 136.8789', '租車門市 GPS 座標')">35.1694, 136.8789</span></td>
+                <td class="navi-col-note">出發前核對 Studless 雪胎與 4WD 傳動配置，確認幼童安全座椅安裝確實。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="郡上八幡 食品模型 samplekobo サンプル工房">
+                <td class="navi-col-day">D2</td>
+                <td class="navi-col-name">郡上八幡 食品模型工房 samplekobo</td>
+                <td><span class="navi-cell-code" onclick="copyText('0575-67-1870', '食品模型工房電話')">0575-67-1870</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('403 723 378*14', '模型工房 MapCode')">403 723 378*14</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('403 723 589*66', '郡上八幡城下町停車場 MapCode')">403 723 589*66</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.7508, 136.9587', '食品模型工房 GPS 座標')">35.7508, 136.9587</span></td>
+                <td class="navi-col-note">老街巷道極為狹小，請設定城下町停車場，停妥後步行 2 分鐘進工房。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="ひるがの高原 SA 休息站 東海北陸道 親子 育嬰 服務區">
+                <td class="navi-col-day">D2</td>
+                <td class="navi-col-name">ひるがの高原 SA（行車中繼站）</td>
+                <td><span class="navi-cell-code" onclick="copyText('0575-73-0101', 'ひるがの高原 SA 電話')">0575-73-0101</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('603 018 732*66', 'ひるがの高原 SA MapCode')">603 018 732*66</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('603 018 642*33', 'SA 服務區大型停車場 MapCode')">603 018 642*33</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.9926, 136.8996', 'ひるがの高原 SA GPS 座標')">35.9926, 136.8996</span></td>
+                <td class="navi-col-note">標高 860 公尺全線最高服務區，設有親子育嬰室、熱開水機與防寒暖房設施。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="高山 Green Hotel 綠色飯店 飛驒物產館 溫泉">
+                <td class="navi-col-day">D2</td>
+                <td class="navi-col-name">高山 Green Hotel（高山綠色飯店）</td>
+                <td><span class="navi-cell-code" onclick="copyText('0577-33-5500', '高山綠色飯店電話')">0577-33-5500</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('191 166 798*52', '綠色飯店 MapCode')">191 166 798*52</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('191 166 828*33', '飯店住客專用停車場 MapCode')">191 166 828*33</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('36.1408, 137.2472', '高山綠色飯店 GPS 座標')">36.1408, 137.2472</span></td>
+                <td class="navi-col-note">住客享專用大型平面免費停車場，附設飛驒物產館與寬敞溫泉浴場。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+
+              <!-- Day 3 -->
+              <tr data-keyword="道の駅 飛騨白川 國道 156 清見 休息站">
+                <td class="navi-col-day">D3</td>
+                <td class="navi-col-name">道の駅 飛騨白川（行車中繼站）</td>
+                <td><span class="navi-cell-code" onclick="copyText('05769-6-1310', '道の駅 飛騨白川電話')">05769-6-1310</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('549 078 043*77', '飛騨白川休息站 MapCode')">549 078 043*77</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('549 078 012*44', '休息站免費停車場 MapCode')">549 078 012*44</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('36.2755, 136.9038', '飛騨白川休息站 GPS 座標')">36.2755, 136.9038</span></td>
+                <td class="navi-col-note">入合掌村前的除雪整備中繼點，設有 24 小時暖房洗手間與路況螢幕。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="白川鄉 合掌村 和田家 相逢橋 せせらぎ公園 停車場">
+                <td class="navi-col-day">D3</td>
+                <td class="navi-col-name">白川鄉合掌村 · 和田家 · 相逢橋</td>
+                <td><span class="navi-cell-code" onclick="copyText('05769-6-1013', '白川鄉觀光協會電話')">05769-6-1013</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('549 019 118*05', '和田家 MapCode')">549 019 118*05</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('549 018 436*85', '村營せせらぎ公園停車場 MapCode')">549 018 436*85</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('36.2562, 136.9035', 'せせらぎ公園停車場 GPS 座標')">36.2562, 136.9035</span></td>
+                <td class="navi-col-note">村落內部全區禁止外來車駛入；務必導航設定「せせらぎ公園停車場」，過橋步行進村。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="白川鄉 城山天守閣 展望台 荻町城跡">
+                <td class="navi-col-day">D3</td>
+                <td class="navi-col-name">白川鄉荻町城山天守閣展望台</td>
+                <td><span class="navi-cell-code" onclick="copyText('05769-6-1728', '天守閣展望台電話')">05769-6-1728</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('549 049 190*33', '展望台 MapCode')">549 049 190*33</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('549 049 160*88', '展望台專用停車場 MapCode')">549 049 160*88</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('36.2606, 136.9083', '天守閣展望台 GPS 座標')">36.2606, 136.9083</span></td>
+                <td class="navi-col-note">展望台附設小客車專用停車位；若大雪陡坡路面結冰管制，需改搭村內接駁巴士。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="飛驒牛 燒肉 味藏天國 丸明 高山老街 晚餐">
+                <td class="navi-col-day">D3</td>
+                <td class="navi-col-name">飛驒牛燒肉 味藏天國（或丸明）</td>
+                <td><span class="navi-cell-code" onclick="copyText('0577-37-1129', '味藏天國電話')">0577-37-1129</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('191 195 079*33', '味藏天國 MapCode')">191 195 079*33</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('191 195 049*66', '味藏天國特約停車場 MapCode')">191 195 049*66</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('36.1415, 137.2508', '味藏天國 GPS 座標')">36.1415, 137.2508</span></td>
+                <td class="navi-col-note">JA 飛驒集團直營特約店，附設專屬免費停車場；備選丸明電話 0577-35-5858。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+
+              <!-- Day 4 -->
+              <tr data-keyword="高山 宮川朝市 市集 蘋果 不動橋 停車場">
+                <td class="navi-col-day">D4</td>
+                <td class="navi-col-name">高山宮川朝市（晨間市集）</td>
+                <td><span class="navi-cell-code" onclick="copyText('0577-32-3333', '高山市觀光課電話')">0577-32-3333</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('191 226 534*33', '宮川朝市 MapCode')">191 226 534*33</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('191 226 443*88', '市營不動橋停車場 MapCode')">191 226 443*88</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('36.1444, 137.2586', '宮川朝市 GPS 座標')">36.1444, 137.2586</span></td>
+                <td class="navi-col-note">沿岸步道清晨禁止車輛駛入，推薦導航停放於市營不動橋停車場，步行 2 分鐘進場。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="高山陣屋 高山昭和館 三町老街 陣屋前停車場">
+                <td class="navi-col-day">D4</td>
+                <td class="navi-col-name">高山陣屋 · 高山昭和館</td>
+                <td><span class="navi-cell-code" onclick="copyText('0577-32-0643', '高山陣屋電話')">0577-32-0643</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('191 196 673*52', '高山陣屋 MapCode')">191 196 673*52</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('191 196 612*77', '市營陣屋前停車場 MapCode')">191 196 612*77</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('36.1396, 137.2575', '高山陣屋 GPS 座標')">36.1396, 137.2575</span></td>
+                <td class="navi-col-note">正前方設有大型市營陣屋前停車場，步行至老街與昭和館（0577-33-7836）約 3 分鐘。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="道の駅 飛騨街道なぎさ 國道 41 號 蘋果派 休息站">
+                <td class="navi-col-day">D4</td>
+                <td class="navi-col-name">道の駅 飛騨街道なぎさ（行車中繼站）</td>
+                <td><span class="navi-cell-code" onclick="copyText('0577-52-4100', '飛騨街道なぎさ電話')">0577-52-4100</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('386 486 348*22', '飛騨街道なぎさ MapCode')">386 486 348*22</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('386 486 318*77', '休息站免費停車場 MapCode')">386 486 318*77</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('36.0028, 137.2655', '飛騨街道渚 GPS 座標')">36.0028, 137.2655</span></td>
+                <td class="navi-col-note">國道 41 號南下前往下呂最佳中繼點，附設手作麵包坊、特產蘋果派與無障礙廁所。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="下呂溫泉 水明館 湯之島館 溫泉飯店 泊車">
+                <td class="navi-col-day">D4</td>
+                <td class="navi-col-name">下呂溫泉 水明館 / 湯之島館</td>
+                <td><span class="navi-cell-code" onclick="copyText('0576-25-2800', '下呂水明館電話')">0576-25-2800</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('386 156 461*44', '水明館 MapCode')">386 156 461*44</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('386 156 431*22', '水明館住客停車場 MapCode')">386 156 431*22</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.8078, 137.2407', '水明館 GPS 座標')">35.8078, 137.2407</span></td>
+                <td class="navi-col-note">日本三大名泉；車輛抵達門口由專人引導泊車，住客享全館專用立體與平面免費車位。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+
+              <!-- Day 5 -->
+              <tr data-keyword="下呂溫泉街 白鷺之湯 下呂布丁 足湯 停車場">
+                <td class="navi-col-day">D5</td>
+                <td class="navi-col-name">下呂溫泉街 · 白鷺之湯 · 下呂布丁</td>
+                <td><span class="navi-cell-code" onclick="copyText('0576-25-2462', '白鷺之湯電話')">0576-25-2462</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('386 156 618*33', '白鷺之湯 MapCode')">386 156 618*33</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('386 156 648*11', '溫泉街中央停車場 MapCode')">386 156 648*11</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.8071, 137.2443', '白鷺之湯 GPS 座標')">35.8071, 137.2443</span></td>
+                <td class="navi-col-note">車輛可停下呂溫泉街中央停車場（首小時免費），沿飛驒川畔漫步品嚐下呂布丁。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="道の駅 美濃白川 ピアチェーレ 國道 41 號 休息站">
+                <td class="navi-col-day">D5</td>
+                <td class="navi-col-name">道の駅 美濃白川（行車中繼站）</td>
+                <td><span class="navi-cell-code" onclick="copyText('0574-72-1330', '道の駅 美濃白川電話')">0574-72-1330</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('386 786 112*33', '美濃白川休息站 MapCode')">386 786 112*33</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('386 786 082*55', '休息站免費停車場 MapCode')">386 786 082*55</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.5902, 137.1423', '美濃白川休息站 GPS 座標')">35.5902, 137.1423</span></td>
+                <td class="navi-col-note">下呂返回名古屋中繼站，具備白川茶產銷展館與熱食小吃，適合幼童伸展換尿布。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="名古屋市區 還車 Toyota TIAD 萬豪 榮商圈">
+                <td class="navi-col-day">D5</td>
+                <td class="navi-col-name">名古屋市區歸還租車（Toyota 名古屋站西口）</td>
+                <td><span class="navi-cell-code" onclick="copyText('052-452-0100', '租車還車站電話')">052-452-0100</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('4 315 298*71', '租車還車站 MapCode')">4 315 298*71</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('4 315 268*00', '還車專用道 MapCode')">4 315 268*00</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.1692, 136.8790', '租車還車站 GPS 座標')">35.1692, 136.8790</span></td>
+                <td class="navi-col-note">還車前務必於 5 公里內加油站加滿油並索取收據；TIAD 飯店 MapCode: 4 290 554*77。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="阿卡將 本町店 綠洲 21 水之宇宙船 久屋大通公園 榮">
+                <td class="navi-col-day">D5</td>
+                <td class="navi-col-name">阿卡將母嬰採購 · 綠洲 21 水之宇宙船</td>
+                <td><span class="navi-cell-code" onclick="copyText('052-962-1011', '綠洲 21 電話')">052-962-1011</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('4 320 223*44', '綠洲 21 MapCode')">4 320 223*44</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('4 320 193*77', '久屋大通地下停車場 MapCode')">4 320 193*77</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.1709, 136.9084', '綠洲 21 GPS 座標')">35.1709, 136.9084</span></td>
+                <td class="navi-col-note">榮町核心購物商圈，地下街連通道直結各百貨公司，推嬰兒車電梯充足無阻礙。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="熱田蓬萊軒 松坂屋店 炭烤鰻魚飯三吃 名古屋名物 晚餐">
+                <td class="navi-col-day">D5</td>
+                <td class="navi-col-name">晚餐 · 熱田蓬萊軒（松坂屋店）鰻魚飯</td>
+                <td><span class="navi-cell-code" onclick="copyText('052-264-3825', '蓬萊軒松坂屋店電話')">052-264-3825</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('4 290 779*44', '蓬萊軒松坂屋店 MapCode')">4 290 779*44</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('4 290 749*88', '松坂屋南館地下停車場 MapCode')">4 290 749*88</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.1652, 136.9079', '熱田蓬萊軒 GPS 座標')">35.1652, 136.9079</span></td>
+                <td class="navi-col-note">位於松坂屋南館 10 樓，建議於 16:30 提早抽號碼牌候位，備有兒童餐椅與餐具。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+
+              <!-- Day 6 -->
+              <tr data-keyword="磁浮鐵道館 金城埠頭 新幹線 火車 リニア・鉄道館">
+                <td class="navi-col-day">D6</td>
+                <td class="navi-col-name">磁浮鐵道館（SCMAGLEV and Railway Park）</td>
+                <td><span class="navi-cell-code" onclick="copyText('052-389-6100', '磁浮鐵道館電話')">052-389-6100</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('4 030 401*11', '磁浮鐵道館 MapCode')">4 030 401*11</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('4 030 311*88', '金城埠頭立體停車場 MapCode')">4 030 311*88</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.0504, 136.8509', '金城埠頭立體停車場 GPS 座標')">35.0504, 136.8509</span></td>
+                <td class="navi-col-note">館方未設自用停車場，請務必導航停放於市營金城埠頭立體停車場（大型 5000 台位）。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="名鐵名古屋站 μ-SKY 特急 機場快捷 鐵道">
+                <td class="navi-col-day">D6</td>
+                <td class="navi-col-name">名鐵名古屋站（μ-SKY 乘車處）</td>
+                <td><span class="navi-cell-code" onclick="copyText('052-582-5151', '名鐵客服電話')">052-582-5151</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('4 316 112*88', '名鐵名古屋站 MapCode')">4 316 112*88</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('4 316 052*71', '名古屋站地下停車場 MapCode')">4 316 052*71</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('35.1706, 136.8837', '名鐵名古屋站 GPS 座標')">35.1706, 136.8837</span></td>
+                <td class="navi-col-note">搭乘 μ-SKY 直達中部國際機場僅需 28 分鐘，全車對號指定席且配有行李置放空間。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="常滑 招財貓 とこにゃん 陶磁器會館 散步道">
+                <td class="navi-col-day">D6</td>
+                <td class="navi-col-name">常滑陶磁器散步道 · 巨型招財貓</td>
+                <td><span class="navi-cell-code" onclick="copyText('0569-34-8888', '常滑觀光協會電話')">0569-34-8888</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('371 678 206*88', '招財貓 MapCode')">371 678 206*88</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('371 678 176*33', '常滑陶磁器會館停車場 MapCode')">371 678 176*33</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('34.8893, 136.8375', '常滑招財貓 GPS 座標')">34.8893, 136.8375</span></td>
+                <td class="navi-col-note">車輛停於陶磁器會館停車場後，沿步道天橋漫步即可近距離與巨大招財貓合影。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="FLIGHT OF DREAMS 波音 787 實機公園 中部機場">
+                <td class="navi-col-day">D6</td>
+                <td class="navi-col-name">FLIGHT OF DREAMS（波音 787 園區）</td>
+                <td><span class="navi-cell-code" onclick="copyText('0569-38-1195', '中部機場服務台電話')">0569-38-1195</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('371 827 885*11', 'FLIGHT OF DREAMS MapCode')">371 827 885*11</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('371 827 825*44', '中部機場 P1/P2 停車場 MapCode')">371 827 825*44</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('34.8569, 136.8149', '波音 787 園區 GPS 座標')">34.8569, 136.8149</span></td>
+                <td class="navi-col-note">室內免門票常態開放，1 樓設有兒童攀爬遊樂區與餐飲，推推車完全平坦無障礙。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+              <tr data-keyword="中部國際機場 星宇航空 出發 報到 櫃台 T1 國際線">
+                <td class="navi-col-day">D6</td>
+                <td class="navi-col-name">中部國際機場 第 1 航廈出發大廳</td>
+                <td><span class="navi-cell-code" onclick="copyText('0569-38-1195', '中部機場代表號')">0569-38-1195</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('371 857 064*22', '第 1 航廈 MapCode')">371 857 064*22</span></td>
+                <td><span class="navi-cell-code navi-cell-pcode" onclick="copyText('371 827 825*44', '機場 P1 停車場 MapCode')">371 827 825*44</span></td>
+                <td><span class="navi-cell-code" onclick="copyText('34.8584, 136.8125', '第 1 航廈 GPS 座標')">34.8584, 136.8125</span></td>
+                <td class="navi-col-note">3F 國際線大廳星宇櫃台報到，4F 藍天城最後採購伴手禮並欣賞 Sky Deck 飛機起降。</td>
+                <td style="text-align: center;"><button class="btn-table-copy" onclick="copyNaviRow(this)">複製整列</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <!-- 4. TAB 2: DAY 1 -->
@@ -1741,6 +2244,26 @@
             </div>
             <div class="place">星宇航空 JX838 航班（TPE ➔ NGO）</div>
             <div class="place-en">STARLUX Airlines Business Class</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=桃園國際機場第一航廈" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('03-273-5000', '桃機代表號')" title="桃園機場代表電話">
+                  <span class="code-label">TEL</span> 03-273-5000
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('25.0797, 121.2342', '桃機 P1/P2 停車場 GPS')" title="出境車道與航廈停車場 GPS 座標">
+                  <span class="code-label p-label">P-GPS</span> 25.0797, 121.2342
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('25.0797, 121.2342', '桃機 T1 GPS 座標')" title="第一航廈經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 25.0797, 121.2342
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               帶著 2 歲 3 個月寶寶享有優先報到、商務貴賓室換尿布與預備熱水。機上寬敞空間讓幼童安穩看卡通與小睡，下機時優先領取嬰兒推車。
             </div>
@@ -1758,21 +2281,29 @@
             <div class="place">中部國際機場 ➔ 名鐵名古屋站</div>
             <div class="place-en">Meitetsu Airport Express μ-SKY</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=中部国際空港第1ターミナル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=中部国際空港第1ターミナル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('0569-38-1195', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('0569-38-1195', '中部機場電話')" title="中部國際機場旅客諮詢電話">
                   <span class="code-label">TEL</span> 0569-38-1195
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('371 857 064*22', 'MapCode')">
+                <span class="nav-code-pill" onclick="copyText('371 857 064*22', '中部機場 MapCode')" title="中部國際機場第 1 航廈">
                   <span class="code-label">MC</span> 371 857 064*22
                   <span class="copy-hint">複製</span>
                 </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('371 827 825*44', '機場 P1 停車場 MapCode')" title="P1/P2 立體停車場連通道">
+                  <span class="code-label p-label">P-MC</span> 371 827 825*44
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('34.8584, 136.8125', '中部機場 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 34.8584, 136.8125
+                  <span class="copy-hint">複製</span>
+                </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               搭乘全車指定席的 μ-SKY 快速直達名古屋市中心，車廂平穩且設有大件行李放置架，免去第一晚疲勞夜間雪駕風險。
             </div>
@@ -1790,21 +2321,29 @@
             <div class="place">入住名古屋 JR 門樓飯店 / 萬豪飯店</div>
             <div class="place-en">Nagoya JR Gate Tower Hotel</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=名古屋JRゲートタワーホテル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=名古屋JRゲートタワーホテル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('052-566-2111', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('052-566-2111', '門樓飯店電話')" title="JR Gate Tower Hotel 代表號">
                   <span class="code-label">TEL</span> 052-566-2111
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('4 316 023*14', 'MapCode')">
+                <span class="nav-code-pill" onclick="copyText('4 316 023*14', '門樓飯店 MapCode')" title="JR Gate Tower 建築本體">
                   <span class="code-label">MC</span> 4 316 023*14
                   <span class="copy-hint">複製</span>
                 </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('4 316 052*71', '門樓飯店地下停車場 MapCode')" title="JR Central Towers / Gate Tower 特約地下收費停車場入口">
+                  <span class="code-label p-label">P-MC</span> 4 316 052*71
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.1713, 136.8833', '門樓飯店 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.1713, 136.8833
+                  <span class="copy-hint">複製</span>
+                </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               飯店大廳與名古屋車站完全共構，推著行李與孩子不用走進戶外寒風。晚餐於高島屋或門樓 12-13F 美食街享用暖胃名古屋烏龍麵或親子丼，早點讓寶寶入睡適應氣溫。
             </div>
@@ -1845,21 +2384,29 @@
             <div class="place">名古屋站前租車據點取車</div>
             <div class="place-en">Toyota / Times Car Rental Nagoya Station</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=ニッポンレンタカー+名古屋駅東口" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=トヨタレンタカー+名古屋駅新幹線口店" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('052-581-0919', '電話號碼')">
-                  <span class="code-label">TEL</span> 052-581-0919
+                <span class="nav-code-pill" onclick="copyText('052-452-0100', '租車門市電話')" title="Toyota 租車名古屋站新幹線口店電話">
+                  <span class="code-label">TEL</span> 052-452-0100
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('4 315 152*77', 'MapCode')">
-                  <span class="code-label">MC</span> 4 315 152*77
+                <span class="nav-code-pill" onclick="copyText('4 315 298*71', '租車門市 MapCode')" title="名古屋站西口租車門市">
+                  <span class="code-label">MC</span> 4 315 298*71
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('4 315 328*44', '太閣通口還車專用道 MapCode')" title="太閣通口專用還車出入口">
+                  <span class="code-label p-label">P-MC</span> 4 315 328*44
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.1694, 136.8789', '租車門市 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.1694, 136.8789
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               領取配備雪胎（Studless Tires）與 4WD 四輪驅動之中型 SUV，務必請店員協助確認幼童汽座已緊固安裝，並租借 ETC 及 CEP（高速公路外國人 Pass）。
             </div>
@@ -1877,21 +2424,29 @@
             <div class="place">郡上八幡散策 · 食品模型工房 samplekobo</div>
             <div class="place-en">Gujo Hachiman & Sample Village</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=郡上八幡サンプル工房" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=サンプル工房+郡上八幡" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('0575-67-1870', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('0575-67-1870', '食品模型工房電話')" title="samplekobo 本館電話">
                   <span class="code-label">TEL</span> 0575-67-1870
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('403 747 483*71', 'MapCode')">
-                  <span class="code-label">MC</span> 403 747 483*71
+                <span class="nav-code-pill" onclick="copyText('403 723 378*14', '模型工房 MapCode')" title="食品模型工房核心建物">
+                  <span class="code-label">MC</span> 403 723 378*14
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('403 723 589*66', '郡上八幡城下町停車場 MapCode')" title="城下町プラザ停車場（步行 2 分鐘進老街）">
+                  <span class="code-label p-label">P-MC</span> 403 723 589*66
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.7508, 136.9587', '食品模型工房 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.7508, 136.9587
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               郡上八幡是日本仿真食品模型的發祥地，工房內陳列極其逼真的冰淇淋、炸蝦拉麵等模型，2 歲寶寶看得目不轉睛。午餐在古街品嚐飛驒牛可樂餅與熱呼呼丸子。
             </div>
@@ -1904,6 +2459,30 @@
             </div>
             <div class="place">郡上八幡 ➔ 飛驒高山行車（行車約 75 分鐘）</div>
             <div class="place-en">Scenic Snow Drive to Takayama</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=ひるがの高原サービスエリア" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0575-73-0101', 'ひるがの高原 SA 電話')" title="東海北陸道標高最高服務區電話">
+                  <span class="code-label">TEL</span> 0575-73-0101
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('603 018 732*66', 'ひるがの高原 SA MapCode')" title="ひるがの高原服務區核心">
+                  <span class="code-label">MC</span> 603 018 732*66
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('603 018 642*33', 'SA 服務區大型停車場 MapCode')" title="高速公路服務區大型免費停車場">
+                  <span class="code-label p-label">P-MC</span> 603 018 642*33
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.9926, 136.8996', 'ひるがの高原 SA GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.9926, 136.8996
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               將長途移動精準對齊寶寶的下午午睡時間。車行穿過層層山嶺與雪景隧道，大人安心駕駛賞雪，寶寶在汽座內安穩補眠，醒來剛好抵達高山。
             </div>
@@ -1921,21 +2500,29 @@
             <div class="place">入住高山 Green Hotel / 飛驒高山老街黃昏步道</div>
             <div class="place-en">Takayama Green Hotel & Sanmachi Suji</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=高山グリーンホテル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=高山グリーンホテル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('0577-33-5500', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('0577-33-5500', '高山綠色飯店電話')" title="高山綠色飯店代表號">
                   <span class="code-label">TEL</span> 0577-33-5500
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('191 166 478*22', 'MapCode')">
-                  <span class="code-label">MC</span> 191 166 478*22
+                <span class="nav-code-pill" onclick="copyText('191 166 798*52', '綠色飯店 MapCode')" title="高山綠色飯店本館">
+                  <span class="code-label">MC</span> 191 166 798*52
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('191 166 828*33', '飯店住客專用停車場 MapCode')" title="飯店住客平面專用免費停車場入口">
+                  <span class="code-label p-label">P-MC</span> 191 166 828*33
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('36.1408, 137.2472', '高山綠色飯店 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 36.1408, 137.2472
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               飯店擁有大型和室與溫泉庭園。傍晚用背巾背著寶寶在三町筋木造古街散步（兩旁有清澈雪水水溝），晚餐享用高評價飛驒牛燒肉（如味藏天國），入口即化！
             </div>
@@ -1979,6 +2566,30 @@
             </div>
             <div class="place">飛驒高山出發 ➔ 白川鄉合掌村</div>
             <div class="place-en">Drive to Shirakawa-go Historic Village</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=道の駅+飛騨白川" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('05769-6-1310', '道の駅 飛騨白川電話')" title="國道 156 號中繼休息站電話">
+                  <span class="code-label">TEL</span> 05769-6-1310
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('549 078 043*77', '飛騨白川休息站 MapCode')" title="飛騨白川休息站核心">
+                  <span class="code-label">MC</span> 549 078 043*77
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('549 078 012*44', '休息站免費停車場 MapCode')" title="全天候免費休息站停車場">
+                  <span class="code-label p-label">P-MC</span> 549 078 012*44
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('36.2755, 136.9038', '飛騨白川休息站 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 36.2755, 136.9038
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               刻意選擇週六日間造訪，避開週日點燈管制的車潮與人龍。經由飛驒清見交流道進入白川鄉，車程約 50 分鐘，直接停入村落指定停車場（村營せせらぎ公園停車場）。
             </div>
@@ -1996,21 +2607,29 @@
             <div class="place">合掌造村落漫步 · 和田家內部參觀 · 相逢橋拍照</div>
             <div class="place-en">Wada House & Deai Bridge Snow Walk</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=白川郷せせらぎ公園駐車場" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=白川郷せせらぎ公園駐車場" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('05769-6-1013', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('05769-6-1013', '白川鄉觀光協會電話')" title="白川鄉觀光協會代表號（和田家 05769-6-1058）">
                   <span class="code-label">TEL</span> 05769-6-1013
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('549 018 438*11', 'MapCode')">
-                  <span class="code-label">MC</span> 549 018 438*11
+                <span class="nav-code-pill" onclick="copyText('549 019 118*05', '和田家 MapCode')" title="和田家本體建物（村內禁止車輛進入）">
+                  <span class="code-label">MC</span> 549 019 118*05
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('549 018 436*85', '村營せせらぎ公園停車場 MapCode')" title="自駕唯一指定外來客停車場（過相逢橋進村）">
+                  <span class="code-label p-label">P-MC</span> 549 018 436*85
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('36.2562, 136.9035', 'せせらぎ公園停車場 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 36.2562, 136.9035
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               走過相逢橋進入宛若童話薑餅屋的童話聚落。讓寶寶穿上防水雪衣雪靴踩踩軟綿綿的白雪，其餘路程以高支撐背巾代步。參觀重要文化財「和田家」，進入室內木地板避寒取暖，欣賞巨大茅草屋頂結構。
             </div>
@@ -2031,21 +2650,29 @@
             <div class="place">白川鄉荻町城山天守閣展望台 ➔ 返回高山市區</div>
             <div class="place-en">Shiroyama Viewpoint & Return Drive to Takayama</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=荻町城跡展望台" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=城山天守閣展望台+白川郷" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('05769-6-1728', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('05769-6-1728', '天守閣展望台電話')" title="城山天守閣展望台餐廳電話">
                   <span class="code-label">TEL</span> 05769-6-1728
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('549 049 190*33', 'MapCode')">
+                <span class="nav-code-pill" onclick="copyText('549 049 190*33', '展望台 MapCode')" title="城山展望台制高點">
                   <span class="code-label">MC</span> 549 049 190*33
                   <span class="copy-hint">複製</span>
                 </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('549 049 160*88', '展望台專用停車場 MapCode')" title="展望台專用小客車停車場入口">
+                  <span class="code-label p-label">P-MC</span> 549 049 160*88
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('36.2606, 136.9083', '天守閣展望台 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 36.2606, 136.9083
+                  <span class="copy-hint">複製</span>
+                </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               搭乘村內接駁車或自駕登上城山天守閣展望台，以經典明信片高空視角俯瞰整座被厚雪包圍的童話合掌村！隨後下午兩點前啟程返回高山，避開午後氣溫驟降與暗冰，寶寶在溫暖車內安穩午睡充電。
             </div>
@@ -2070,21 +2697,29 @@
             <div class="place">高山飯店溫泉休整 · 高山特產飛驒牛壽司與燒肉</div>
             <div class="place-en">Hot Springs & Rest in Takayama</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=味蔵天国+高山" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=味蔵天国+高山" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('0577-37-1129', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('0577-37-1129', '味藏天國電話')" title="JA 飛驒牛特約店味藏天國（丸明 0577-35-5858）">
                   <span class="code-label">TEL</span> 0577-37-1129
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('191 195 244*71', 'MapCode')">
-                  <span class="code-label">MC</span> 191 195 244*71
+                <span class="nav-code-pill" onclick="copyText('191 195 079*33', '味藏天國 MapCode')" title="味藏天國店面">
+                  <span class="code-label">MC</span> 191 195 079*33
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('191 195 049*66', '味藏天國特約停車場 MapCode')" title="餐廳專用大型平面免費停車場">
+                  <span class="code-label p-label">P-MC</span> 191 195 049*66
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('36.1415, 137.2508', '味藏天國 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 36.1415, 137.2508
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               續住高山同一飯店（免打包換行李）。全家在飄著雪花的溫泉池放鬆雙腿，晚上買高山地酒、飛驒牛手握壽司回房間愜意享用。
             </div>
@@ -2133,21 +2768,29 @@
             <div class="place">高山宮川朝市晨間漫步</div>
             <div class="place-en">Miyagawa Morning Market</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=宮川朝市" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=宮川朝市+高山" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('0577-32-3333', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('0577-32-3333', '高山觀光課電話')" title="高山市觀光課代表號">
                   <span class="code-label">TEL</span> 0577-32-3333
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('191 221 445*33', 'MapCode')">
-                  <span class="code-label">MC</span> 191 221 445*33
+                <span class="nav-code-pill" onclick="copyText('191 226 534*33', '宮川朝市 MapCode')" title="宮川朝市河岸步道核心">
+                  <span class="code-label">MC</span> 191 226 534*33
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('191 226 443*88', '市營不動橋停車場 MapCode')" title="市營不動橋停車場 / 花里停車場（步行 2 分鐘進朝市）">
+                  <span class="code-label p-label">P-MC</span> 191 226 443*88
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('36.1444, 137.2586', '宮川朝市 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 36.1444, 137.2586
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               沿著宮川河畔的傳統市集，沿途欣賞垂掛在屋簷的巨大冰柱與河中野鴨。在地小農販售清脆多汁的飛驒蘋果、蜜柑與草莓，現切給寶寶當健康天然水果點心。
             </div>
@@ -2165,21 +2808,29 @@
             <div class="place">高山陣屋散策 · 高山昭和館童玩體驗</div>
             <div class="place-en">Takayama Showa-kan Museum</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=高山陣屋" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=高山陣屋" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('0577-32-0643', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('0577-32-0643', '高山陣屋電話')" title="高山陣屋代表號（昭和館 0577-33-7836）">
                   <span class="code-label">TEL</span> 0577-32-0643
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('191 196 663*88', 'MapCode')">
-                  <span class="code-label">MC</span> 191 196 663*88
+                <span class="nav-code-pill" onclick="copyText('191 196 673*52', '高山陣屋 MapCode')" title="高山陣屋核心古蹟">
+                  <span class="code-label">MC</span> 191 196 673*52
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('191 196 612*77', '市營陣屋前停車場 MapCode')" title="高山市營陣屋前大型收費停車場">
+                  <span class="code-label p-label">P-MC</span> 191 196 612*77
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('36.1396, 137.2575', '高山陣屋 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 36.1396, 137.2575
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               替代寒冷嚴苛的新穗高高海拔纜車，帶寶寶走進暖呼呼的昭和館。內部完整復刻 1960 年代日本雜貨店、舊教室、老爺車與復古玩具，幼童可以親手觸碰體驗，避寒避風又好玩。
             </div>
@@ -2192,6 +2843,30 @@
             </div>
             <div class="place">高山 ➔ 下呂溫泉（行車約 70 分鐘）</div>
             <div class="place-en">Drive South to Gero Onsen</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=道の駅+飛騨街道なぎさ" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0577-52-4100', '飛騨街道なぎさ電話')" title="國道 41 號飛驒街道渚休息站電話">
+                  <span class="code-label">TEL</span> 0577-52-4100
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('386 486 348*22', '飛騨街道なぎさ MapCode')" title="飛騨街道渚休息站核心">
+                  <span class="code-label">MC</span> 386 486 348*22
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('386 486 318*77', '休息站免費停車場 MapCode')" title="免費大型平面停車場">
+                  <span class="code-label p-label">P-MC</span> 386 486 318*77
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('36.0028, 137.2655', '飛騨街道渚 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 36.0028, 137.2655
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               順著益田川沿線國道 41 號開往下游的名湯「下呂溫泉」，寶寶在車上睡午覺，醒來直接抵達日本三大名泉之一！
             </div>
@@ -2209,21 +2884,29 @@
             <div class="place">入住下呂溫泉頂級旅館（水明館 / 湯之島館）</div>
             <div class="place-en">Gero Onsen Suimeikan / Yunoshimakan</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=下呂温泉水明館" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=下呂温泉+水明館" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('0576-25-2800', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('0576-25-2800', '下呂水明館電話')" title="水明館代表號（湯之島館 0576-25-4126）">
                   <span class="code-label">TEL</span> 0576-25-2800
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('386 126 534*36', 'MapCode')">
-                  <span class="code-label">MC</span> 386 126 534*36
+                <span class="nav-code-pill" onclick="copyText('386 156 461*44', '水明館 MapCode')" title="水明館本館建築">
+                  <span class="code-label">MC</span> 386 156 461*44
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('386 156 431*22', '水明館住客停車場 MapCode')" title="住客專用免費立體與平面停車場入口">
+                  <span class="code-label p-label">P-MC</span> 386 156 431*22
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.8078, 137.2407', '水明館 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.8078, 137.2407
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               預約旅館內的「貸切家族風呂」，專屬私密浴池水溫溫和、鹼性滑順被譽為美人湯，全家兩大一小能一同泡湯嬉戲不怕打擾他人。晚餐於客房內悠閒享用精緻會席料理。
             </div>
@@ -2272,21 +2955,29 @@
             <div class="place">下呂溫泉街 · 白鷺之湯 · 下呂布丁</div>
             <div class="place-en">Gero Onsen Town Walk & Gero Pudding</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=白鷺の湯+下呂温泉" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=白鷺の湯+下呂温泉" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('0576-25-2462', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('0576-25-2462', '白鷺之湯電話')" title="白鷺之湯代表號（下呂布丁 0576-25-3738）">
                   <span class="code-label">TEL</span> 0576-25-2462
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('386 126 718*14', 'MapCode')">
-                  <span class="code-label">MC</span> 386 126 718*14
+                <span class="nav-code-pill" onclick="copyText('386 156 618*33', '白鷺之湯 MapCode')" title="白鷺之湯公眾浴場核心">
+                  <span class="code-label">MC</span> 386 156 618*33
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('386 156 648*11', '溫泉街中央停車場 MapCode')" title="下呂溫泉街中央停車場 / 阿多野谷河畔停車場">
+                  <span class="code-label p-label">P-MC</span> 386 156 648*11
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.8071, 137.2443', '白鷺之湯 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.8071, 137.2443
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               早晨沿溫泉街散步，帶著小毛巾在免費的白鷺足湯幫寶寶泡泡小腳丫，順便品嚐人氣極高的青蛙招牌「下呂溫泉布丁」。
             </div>
@@ -2299,6 +2990,30 @@
             </div>
             <div class="place">下呂出發 ➔ 名古屋市區（行車約 2 小時）</div>
             <div class="place-en">Drive Back to Nagoya City</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=道の駅+美濃白川+ピアチェーレ" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0574-72-1330', '道の駅 美濃白川電話')" title="國道 41 號道の駅 美濃白川ピアチェーレ電話">
+                  <span class="code-label">TEL</span> 0574-72-1330
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('386 786 112*33', '美濃白川休息站 MapCode')" title="道の駅 美濃白川核心">
+                  <span class="code-label">MC</span> 386 786 112*33
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('386 786 082*55', '休息站免費停車場 MapCode')" title="免費大型休息站停車場">
+                  <span class="code-label p-label">P-MC</span> 386 786 082*55
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.5902, 137.1423', '美濃白川休息站 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.5902, 137.1423
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               離開山區雪地，開回平地名古屋市區，中途在休息站享用午餐。
             </div>
@@ -2320,21 +3035,29 @@
             <div class="place">名古屋市區歸還租車 ➔ 入住榮町商圈飯店</div>
             <div class="place-en">Return Rental Car & Check-in Sakae</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=TIAD+オートグラフコレクション+名古屋" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=トヨタレンタカー+名古屋駅新幹線口店" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('052-252-2288', '電話號碼')">
-                  <span class="code-label">TEL</span> 052-252-2288
+                <span class="nav-code-pill" onclick="copyText('052-452-0100', '租車還車站電話')" title="Toyota 租車名古屋站西口店電話（TIAD 飯店 052-252-2288）">
+                  <span class="code-label">TEL</span> 052-452-0100
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('4 290 554*77', 'MapCode')">
-                  <span class="code-label">MC</span> 4 290 554*77
+                <span class="nav-code-pill" onclick="copyText('4 315 298*71', '租車還車站 MapCode')" title="名古屋站西口還車據點">
+                  <span class="code-label">MC</span> 4 315 298*71
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('4 315 268*00', '還車專用道 MapCode')" title="還車站還車專用檢查入口（TIAD 飯店停車場 4 290 524*55）">
+                  <span class="code-label p-label">P-MC</span> 4 315 268*00
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.1692, 136.8790', '租車還車站 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.1692, 136.8790
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               在名古屋市中心順利還車，圓滿完成 4 天雪地自駕！入住榮町生活機能極佳的親子友善飯店（如 TIAD 或 名古屋日航尚格）。
             </div>
@@ -2352,21 +3075,29 @@
             <div class="place">阿卡將母嬰採購 · 久屋大通公園 · 綠洲 21 水之宇宙船</div>
             <div class="place-en">Akachan Honpo, Hisaya-odori Park & Oasis 21</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=オアシス21+名古屋" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=オアシス21+名古屋" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('052-962-1011', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('052-962-1011', '綠洲 21 電話')" title="綠洲 21 代表號（松坂屋 052-243-7311）">
                   <span class="code-label">TEL</span> 052-962-1011
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('4 320 011*55', 'MapCode')">
-                  <span class="code-label">MC</span> 4 320 011*55
+                <span class="nav-code-pill" onclick="copyText('4 320 223*44', '綠洲 21 MapCode')" title="綠洲 21 水之宇宙船">
+                  <span class="code-label">MC</span> 4 320 223*44
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('4 320 193*77', '久屋大通地下停車場 MapCode')" title="綠洲 21 / 久屋大通公園地下特約停車場">
+                  <span class="code-label p-label">P-MC</span> 4 320 193*77
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.1709, 136.9084', '綠洲 21 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.1709, 136.9084
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               在市區專門採買日本超人氣 2 歲童裝、米餅與防寒備品。傍晚漫步於久屋大通公園與綠洲 21（Oasis 21），走上頂層「水之宇宙船」玻璃步道，俯瞰璀璨倒影與中部電力 MIRAI TOWER 點燈。
             </div>
@@ -2390,21 +3121,29 @@
             <div class="place">晚餐 · 熱田蓬萊軒（松坂屋店）炭烤鰻魚飯三吃</div>
             <div class="place-en">Atsuta Houraiken Hitsumabushi</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=あつた蓬莱軒+松坂屋店" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=あつた蓬莱軒+松坂屋店" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('052-264-3825', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('052-264-3825', '熱田蓬萊軒松坂屋店電話')" title="熱田蓬萊軒松坂屋店代表號">
                   <span class="code-label">TEL</span> 052-264-3825
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('4 289 114*88', 'MapCode')">
-                  <span class="code-label">MC</span> 4 289 114*88
+                <span class="nav-code-pill" onclick="copyText('4 290 779*44', '熱田蓬萊軒 MapCode')" title="松坂屋名古屋店南館">
+                  <span class="code-label">MC</span> 4 290 779*44
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('4 290 749*88', '松坂屋南館地下停車場 MapCode')" title="松坂屋南館特約地下收費停車場">
+                  <span class="code-label p-label">P-MC</span> 4 290 749*88
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.1652, 136.9079', '熱田蓬萊軒 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.1652, 136.9079
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               造訪名古屋必吃百年名店「熱田蓬萊軒」！招牌木桶盛裝現烤焦香鰻魚，經典三種吃法：一品原味蒲燒、二拌山葵細蔥海苔、三淋熱高湯茶漬飯，為名古屋之夜劃下最完美的味覺句點。
             </div>
@@ -2453,21 +3192,29 @@
             <div class="place">磁浮鐵道館（Scmaglev and Railway Park）</div>
             <div class="place-en">SCMAGLEV and Railway Park</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=リニア・鉄道館" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=リニア・鉄道館" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('052-389-6100', '電話號碼')">
+                <span class="nav-code-pill" onclick="copyText('052-389-6100', '磁浮鐵道館電話')" title="磁浮鐵道館代表號">
                   <span class="code-label">TEL</span> 052-389-6100
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('4 026 517*41', 'MapCode')">
-                  <span class="code-label">MC</span> 4 026 517*41
+                <span class="nav-code-pill" onclick="copyText('4 030 401*11', '磁浮鐵道館 MapCode')" title="磁浮鐵道館本體展館">
+                  <span class="code-label">MC</span> 4 030 401*11
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('4 030 311*88', '金城埠頭立體停車場 MapCode')" title="重要：館內無自用車位，自駕請停市營金城埠頭立體停車場">
+                  <span class="code-label p-label">P-MC</span> 4 030 311*88
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.0504, 136.8509', '金城埠頭立體停車場 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.0504, 136.8509
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               全室內溫暖無障礙園區！展示從蒸汽火車、新幹線到未來超電導磁浮列車的 39 輛真實列車，還有全日本最大規模的超精細鐵道立體模型，2 歲小孩看到會動的火車絕對嗨翻天！
             </div>
@@ -2480,6 +3227,30 @@
             </div>
             <div class="place">名古屋市區 ➔ 中部國際機場（NGO）</div>
             <div class="place-en">Train to Chubu Centrair International Airport</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=名鉄名古屋駅" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('052-582-5151', '名鐵客服電話')" title="名古屋鐵道客服電話">
+                  <span class="code-label">TEL</span> 052-582-5151
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('4 316 112*88', '名鐵名古屋站 MapCode')" title="名鐵名古屋站大廳入口">
+                  <span class="code-label">MC</span> 4 316 112*88
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('4 316 052*71', '名古屋站地下停車場 MapCode')" title="名古屋站地下停車場">
+                  <span class="code-label p-label">P-MC</span> 4 316 052*71
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('35.1706, 136.8837', '名鐵名古屋站 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 35.1706, 136.8837
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               回飯店取大件行李，搭乘名鐵前往中部國際機場。
             </div>
@@ -2497,21 +3268,33 @@
             <div class="place">常滑巨型招財貓 ＆ FLIGHT OF DREAMS（波音 787 實機公園）</div>
             <div class="place-en">Tokoname Giant Tokonyan & Flight of Dreams</div>
             <div class="spot-nav-bar">
-              <a href="https://www.google.com/maps/search/?api=1&query=とこにゃん+常滑市" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap">
+              <a href="https://www.google.com/maps/search/?api=1&query=とこにゃん+常滑市" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Google Maps 導航
               </a>
               <div class="nav-code-group">
-                <span class="nav-code-pill" onclick="copyText('0569-35-0966', '電話號碼')">
-                  <span class="code-label">TEL</span> 0569-35-0966
+                <span class="nav-code-pill" onclick="copyText('0569-34-8888', '常滑觀光協會電話')" title="常滑觀光協會（陶磁器會館 0569-35-2033）">
+                  <span class="code-label">TEL</span> 0569-34-8888
                   <span class="copy-hint">複製</span>
                 </span>
-                <span class="nav-code-pill" onclick="copyText('371 784 275*66', 'MapCode')">
-                  <span class="code-label">MC</span> 371 784 275*66
+                <span class="nav-code-pill" onclick="copyText('371 678 206*88', '招財貓 MapCode')" title="常滑巨型招財貓とこにゃん">
+                  <span class="code-label">MC</span> 371 678 206*88
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('371 678 176*33', '陶磁器會館停車場 MapCode')" title="常滑市陶磁器會館專用停車場">
+                  <span class="code-label p-label">P-MC</span> 371 678 176*33
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('371 827 885*11', '波音 787 園區 MapCode')" title="波音 787 實機公園（機場 P1/P2 停車場）">
+                  <span class="code-label">787-MC</span> 371 827 885*11
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('34.8893, 136.8375', '常滑招財貓 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 34.8893, 136.8375
                   <span class="copy-hint">複製</span>
                 </span>
               </div>
-            </div>
+            </div> </div>
             <div class="desc">
               前往機場前順訪臨空常滑「巨大招財貓 Tokonyan」，拍下祈求平安招福的超萌合照！隨後抵達中部機場 FLIGHT OF DREAMS，機翼下方設有免費幼童遊戲區，走到頂樓 Sky Deck 迎風觀看飛機滑行起飛。
             </div>
@@ -2524,6 +3307,30 @@
             </div>
             <div class="place">星宇航空報到 ➔ 返抵台灣（TPE）</div>
             <div class="place-en">STARLUX Airlines JX839 (NGO 19:40 ➔ TPE 22:15)</div>
+            <div class="spot-nav-bar">
+              <a href="https://www.google.com/maps/search/?api=1&query=中部国際空港第1ターミナル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Google Maps 導航
+              </a>
+              <div class="nav-code-group">
+                <span class="nav-code-pill" onclick="copyText('0569-38-1195', '中部機場代表號')" title="中部國際機場服務中心電話">
+                  <span class="code-label">TEL</span> 0569-38-1195
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill" onclick="copyText('371 857 064*22', '第 1 航廈 MapCode')" title="中部國際機場第 1 航廈 3F 國際線出發大廳">
+                  <span class="code-label">MC</span> 371 857 064*22
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill p-pill" onclick="copyText('371 827 825*44', '機場 P1 停車場 MapCode')" title="中部國際機場 P1 停車場（連通道直達 3F 報到櫃台）">
+                  <span class="code-label p-label">P-MC</span> 371 827 825*44
+                  <span class="copy-hint">複製</span>
+                </span>
+                <span class="nav-code-pill gps-pill" onclick="copyText('34.8584, 136.8125', '第 1 航廈 GPS 座標')" title="十進位經緯度座標">
+                  <span class="code-label gps-label">GPS</span> 34.8584, 136.8125
+                  <span class="copy-hint">複製</span>
+                </span>
+              </div>
+            </div>
             <div class="desc">
               17:40 辦理登機與托運行李，採購赤福與蝦餅伴手禮。19:40 飛機起飛，寶寶在座位上安穩入睡，22:15 順利返抵桃園機場，圓滿結束冬季合掌村溫泉假期！
             </div>
@@ -3375,6 +4182,42 @@
         localStorage.removeItem("shirakawago_checklist_2027");
         initChecklist();
       }
+    }
+
+    // 全景點導航總表關鍵字過濾
+    function filterNaviTable(query) {
+      const q = (query || "").trim().toLowerCase();
+      const rows = document.querySelectorAll("#master-navi-table tbody tr");
+      rows.forEach(row => {
+        if (!q) {
+          row.style.display = "";
+          return;
+        }
+        const keyword = (row.getAttribute("data-keyword") || "").toLowerCase();
+        const text = row.textContent.toLowerCase();
+        if (keyword.includes(q) || text.includes(q)) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    }
+
+    // 複製全景點導航總表單列完整資訊
+    function copyNaviRow(btn) {
+      const row = btn.closest("tr");
+      if (!row) return;
+      const day = row.querySelector(".navi-col-day")?.textContent.trim() || "";
+      const name = row.querySelector(".navi-col-name")?.textContent.trim() || "";
+      const cells = row.querySelectorAll("td");
+      const tel = cells[2]?.textContent.trim() || "";
+      const mc = cells[3]?.textContent.trim() || "";
+      const pmc = cells[4]?.textContent.trim() || "";
+      const gps = cells[5]?.textContent.trim() || "";
+      const note = row.querySelector(".navi-col-note")?.textContent.trim() || "";
+
+      const rowSummary = `【${day} · ${name}】\n電話（TEL）：${tel}\n景點 MapCode：${mc}\n停車場 MapCode（P-MC）：${pmc}\n手機 GPS 座標：${gps}\n自駕指引：${note}`;
+      copyText(rowSummary, `【${name}】整列定位資訊`);
     }
 
     // 註冊 Service Worker 離線支援
