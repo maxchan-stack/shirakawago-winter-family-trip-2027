@@ -1079,6 +1079,102 @@
       border-color: #3b82f6;
     }
 
+  
+    /* ========== 深度優化：日落黑冰警戒、暖房尿布台、Plan B 與加油餐飲卡 ========== */
+    .safety-sunset-badge {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.45rem;
+      padding: 0.35rem 0.65rem;
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      color: #991b1b;
+    }
+    .safety-sunset-badge .sunset-time {
+      font-weight: 700;
+      background: #b91c1c;
+      color: #ffffff;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .baby-care-facility-card {
+      margin: 0.8rem 0;
+      padding: 0.65rem 0.85rem;
+      background: #f0fdf4;
+      border: 1px dashed #86efac;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      color: #166534;
+      line-height: 1.5;
+    }
+    .baby-care-facility-card strong {
+      color: #14532d;
+    }
+
+    .plan-b-accordion {
+      margin: 1.2rem 0 0.5rem 0;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 8px;
+      background: #f8fafc;
+      overflow: hidden;
+    }
+    .plan-b-summary {
+      padding: 0.65rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      background: #eff6ff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .plan-b-summary:hover {
+      background: #dbeafe;
+    }
+    .plan-b-body {
+      padding: 0.75rem 0.9rem;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      background: #ffffff;
+      border-top: 1px solid rgba(59, 130, 246, 0.15);
+    }
+
+    .dining-strategy-box, .gas-station-box {
+      margin: 0.9rem 0;
+      padding: 0.8rem 0.95rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+    .dining-strategy-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+    }
+    .dining-strategy-box h4 {
+      color: #78350f;
+      font-size: 0.86rem;
+      margin-bottom: 0.35rem;
+    }
+    .gas-station-box {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+    }
+    .gas-station-box h4 {
+      color: #0f172a;
+      font-size: 0.86rem;
+      margin-bottom: 0.35rem;
+    }
+
   </style>
 </head>
 <body>
@@ -1252,6 +1348,15 @@
             </div>
           </div>
         </div>
+              <details class="plan-b-accordion">
+          <summary class="plan-b-summary">
+            <span>Plan B 惡劣風雪與班機延誤應變備案</span>
+            <span>展開查看 ▼</span>
+          </summary>
+          <div class="plan-b-body">
+            若冬季中部機場降雪導致班機稍有延遲，抵達名鐵名古屋站後取消戶外或美食街排隊，直接於飯店 1F 門樓商場便利商店或高島屋地下美食街購買熱湯麵與日式熟食便當帶回客房；提早幫孩子放溫熱水澡適應氣溫，確保隔日自駕精神充沛。
+          </div>
+        </details>
       </article>
     </section>
 
@@ -1371,6 +1476,15 @@
             </div>
           </div>
         </div>
+              <details class="plan-b-accordion">
+          <summary class="plan-b-summary">
+            <span>Plan B 惡劣風雪與高山山道管制備案</span>
+            <span>展開查看 ▼</span>
+          </summary>
+          <div class="plan-b-body">
+            若東海北陸自動車道白鳥至清見段因降雪實施嚴格限速或暴雪，取消郡上八幡漫步行程，自駕車速放緩直接開往高山市區；抵達後轉入室內溫暖景點「飛驒高山大鐘乳洞（洞內常年恆溫 12°C）」或提前入住高山 Green Hotel 享受溫泉庭園。
+          </div>
+        </details>
       </article>
     </section>
 
@@ -1383,6 +1497,13 @@
             <div class="day-summary-title">童話白雪積木 · 白川鄉合掌村日間踩雪 · 宿高山</div>
           </div>
           <div class="day-date">2027.01.23 (六) ｜ 氣溫約 -5°C ~ 1°C（積雪深厚）</div>
+          <div class="safety-sunset-badge">
+            <span class="sunset-time">當日日落：17:05</span>
+            <span>合掌村撤離硬線：13:45 前必須驅車離開白川鄉，14:45 前返抵高山市區，避開午後低溫結凍與車潮。</span>
+          </div>
+          <div class="baby-care-facility-card">
+            <strong>幼兒暖房與換尿布安全據點</strong>：白川鄉村營せせらぎ公園停車場觀光案內所（全村唯一大型暖氣休息所，設有專用尿布台與飲水機）｜重要文化財和田家室內土間暖房區。
+          </div>
         </div>
 
         <div class="timeline">
@@ -1474,6 +1595,13 @@
               <img src="img/hida_beef_yakiniku.jpg" alt="飛驒牛燒肉" loading="lazy" />
               <div class="caption">Takayama Hida Wagyu Yakiniku · 頂級 A5 霜降飛驒牛燒肉盛宴</div>
             </div>
+            <div class="dining-strategy-box">
+              <h4>飛驒高山飛驒牛燒肉候位防雷攻略（幼兒友善指南）</h4>
+              <p>
+                <strong>味藏天國候位技巧</strong>：上午 10:30 由一位家長至店門口抽取號碼券，其餘成員留在飯店溫暖室內休息，11:30 開店或傍晚 17:00 開店準時入場，避免 2 歲小孩在零下低溫罰站排隊。<br>
+                <strong>高友善備選方案 · 丸明 飛驒高山店</strong>（電話：0577-35-5858｜MapCode：191 195 448*11）：步行距高山站僅 4 分鐘，店面寬敞超過 100 席，備有多間和室榻榻米包廂，小童可脫鞋坐臥，免除漫長候位痛苦。
+              </p>
+            </div>
             <div class="place">高山飯店溫泉休整 · 高山特產飛驒牛壽司與燒肉</div>
             <div class="place-en">Hot Springs & Rest in Takayama</div>
             <div class="spot-nav-bar">
@@ -1497,6 +1625,15 @@
             </div>
           </div>
         </div>
+              <details class="plan-b-accordion">
+          <summary class="plan-b-summary">
+            <span>Plan B 白川鄉風雪過大或道路封閉備案</span>
+            <span>展開查看 ▼</span>
+          </summary>
+          <div class="plan-b-body">
+            若清晨 NEXCO 發布飛驒清見至白川鄉高速公路封閉（通行止），切勿冒險行駛積雪山路；立即切換為高山市郊景點「飛驒之里（飛騨の里）」，同樣為傳統合掌造茅草民家聚落，距高山站僅 10 分鐘車程，無山路風險且人潮極少，能輕鬆完成雪地踩雪與拍照！
+          </div>
+        </details>
       </article>
     </section>
 
@@ -1509,6 +1646,13 @@
             <div class="day-summary-title">宮川朝市買水果 · 昭和館室內玩樂 · 下呂溫泉家族湯</div>
           </div>
           <div class="day-date">2027.01.24 (日) ｜ 氣溫約 -1°C ~ 6°C</div>
+          <div class="safety-sunset-badge">
+            <span class="sunset-time">當日日落：17:06</span>
+            <span>國道 41 號行車警戒：峽谷沿溪路段背陽坡易結暗冰，13:15 高山出發，14:30 前抵達下呂水明館入宿。</span>
+          </div>
+          <div class="baby-care-facility-card">
+            <strong>幼兒暖房與換尿布安全據點</strong>：高山陣屋前觀光案內所暖房｜高山昭和館休息區｜下呂溫泉水明館本館 1F 大廳。
+          </div>
         </div>
 
         <div class="timeline">
@@ -1620,6 +1764,15 @@
             </div>
           </div>
         </div>
+              <details class="plan-b-accordion">
+          <summary class="plan-b-summary">
+            <span>Plan B 朝市強烈風雪或低溫避難備案</span>
+            <span>展開查看 ▼</span>
+          </summary>
+          <div class="plan-b-body">
+            若高山清晨暴雪夾帶強風，取消宮川河畔露天朝市，全天轉入全室內暖氣的高山昭和館，昭和館內復古雜貨鋪與童玩區可讓 2 歲幼童在溫暖室內充分活動；隨後中午提前出發前往下呂溫泉，提早 Check-in 享受貸切家族風呂。
+          </div>
+        </details>
       </article>
     </section>
 
@@ -1632,6 +1785,13 @@
             <div class="day-summary-title">下呂溫泉街散策 · 回名古屋還車 · 榮商圈採購母嬰</div>
           </div>
           <div class="day-date">2027.01.25 (一) ｜ 氣溫約 2°C ~ 9°C</div>
+          <div class="safety-sunset-badge">
+            <span class="sunset-time">當日日落：17:07</span>
+            <span>離開山區重返名古屋平地，道路無積雪。市區行車注意下班塞車潮，預留還車加油時間。</span>
+          </div>
+          <div class="baby-care-facility-card">
+            <strong>幼兒暖房與換尿布安全據點</strong>：下呂溫泉白鷺之湯足湯亭｜名古屋榮商圈松坂屋本館 5F 嬰兒休息室（提供熱水、微波爐、換尿布床）。
+          </div>
         </div>
 
         <div class="timeline">
@@ -1683,6 +1843,14 @@
             <div class="slot-top">
               <span class="time">14:00</span>
               <span class="tags"><span class="tag-pill drive">還車解除雪駕任務</span></span>
+            </div>
+            <div class="gas-station-box">
+              <h4>市區還車前 5 公里指定滿油加油站（滿タン返し）</h4>
+              <p>
+                日本租車嚴格規定必須滿油還車並提供 5 公里內加油收據。請於市區還車前導航至以下 24 小時營業加油站，告知工作人員「レギュラー、満タンでお願いします（Regular 汽油加滿）」並保留蓋章收據：<br>
+                <strong>ENEOS 名古屋名站南 SS（距名站 1.5 公里）</strong>：電話 052-586-1371｜MapCode 4 286 648*11<br>
+                <strong>出光 榮商圈 SS（距榮町飯店 1.2 公里）</strong>：電話 052-241-7661｜MapCode 4 290 847*22
+              </p>
             </div>
             <div class="place">名古屋市區歸還租車 ➔ 入住榮町商圈飯店</div>
             <div class="place-en">Return Rental Car & Check-in Sakae</div>
@@ -1748,6 +1916,12 @@
               <img src="img/nagoya_hitsumabushi.jpg" alt="熱田蓬萊軒鰻魚飯三吃" loading="lazy" />
               <div class="caption">Nagoya Hitsumabushi · 熱田蓬萊軒經典炭烤鰻魚飯三吃</div>
             </div>
+            <div class="dining-strategy-box">
+              <h4>熱田蓬萊軒（松坂屋店）幼童友善候位攻略</h4>
+              <p>
+                松坂屋南館 10F 蓬萊軒於 10:00 百貨營業時即可抽號碼整理券。建議一位家長提早前往領號，隨後帶著孩子在松坂屋本館 5F 兒童育嬰室或玩具專櫃舒適漫步，待叫號時間接近再搭電梯至 10F 輕鬆入座，店內備有完備兒童座椅與幼兒餐具。
+              </p>
+            </div>
             <div class="place">晚餐 · 熱田蓬萊軒（松坂屋店）炭烤鰻魚飯三吃</div>
             <div class="place-en">Atsuta Houraiken Hitsumabushi</div>
             <div class="spot-nav-bar">
@@ -1771,6 +1945,15 @@
             </div>
           </div>
         </div>
+              <details class="plan-b-accordion">
+          <summary class="plan-b-summary">
+            <span>Plan B 名古屋市區雨天 / 低溫室內備案</span>
+            <span>展開查看 ▼</span>
+          </summary>
+          <div class="plan-b-body">
+            若名古屋市區遇降雨或低溫冷風，取消久屋大通公園露天散步，改前往「名古屋市科學館（全球最大巨蛋天文館）」或「則武之森（Noritake Garden）室內文化工藝館與咖啡廳」，全程室內無障礙且設有完善育嬰設施。
+          </div>
+        </details>
       </article>
     </section>
 
@@ -1783,6 +1966,13 @@
             <div class="day-summary-title">真實新幹線世界 · 中部機場展望台 · 滿載返台</div>
           </div>
           <div class="day-date">2027.01.26 (二) ｜ 氣溫約 4°C ~ 11°C</div>
+          <div class="safety-sunset-badge">
+            <span class="sunset-time">當日日落：17:08</span>
+            <span>全天室內溫暖無障礙設施，推車暢行無阻，17:40 前抵達機場航廈報到。</span>
+          </div>
+          <div class="baby-care-facility-card">
+            <strong>幼兒暖房與換尿布安全據點</strong>：磁浮鐵道館 1F 兒童遊戲育嬰室｜中部國際機場 FLIGHT OF DREAMS 2F 育兒哺乳室。
+          </div>
         </div>
 
         <div class="timeline">
@@ -1874,6 +2064,15 @@
             </div>
           </div>
         </div>
+              <details class="plan-b-accordion">
+          <summary class="plan-b-summary">
+            <span>Plan B 幼童體力不足或時間緊湊直接候機備案</span>
+            <span>展開查看 ▼</span>
+          </summary>
+          <div class="plan-b-body">
+            若在磁浮鐵道館遊玩後幼童已熟睡或大人體力需調適，取消常滑市區停留，直接搭乘名鐵前往中部國際機場第二航廈 FLIGHT OF DREAMS；在波音 787 機翼下的星巴克與室內休息區悠閒整理行李，讓幼童在登機前盡情在室內軟質地墊爬行放電。
+          </div>
+        </details>
       </article>
     </section>
 
@@ -2077,7 +2276,10 @@
       panels.forEach(p => {
         p.classList.toggle("is-active", p.dataset.panel === tabId);
       });
-      window.scrollTo({ top: 380, behavior: 'smooth' });
+      const navContainer = document.querySelector(".tab-nav");
+      if (navContainer) {
+        navContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
 
     tabBtns.forEach(btn => {
