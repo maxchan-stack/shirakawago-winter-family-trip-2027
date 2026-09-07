@@ -859,6 +859,262 @@
       border-color: #2563eb;
     }
 
+    /* ========== 每日時間軸底部線性切換導航 ========== */
+    .day-pagination-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.85rem;
+      margin-top: 1.8rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed rgba(30, 41, 59, 0.2);
+    }
+    .btn-day-page {
+      display: inline-flex;
+      flex-direction: column;
+      padding: 0.75rem 1.15rem;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid rgba(30, 41, 59, 0.16);
+      text-decoration: none;
+      color: var(--ink);
+      cursor: pointer;
+      flex: 1;
+      max-width: 260px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+    .btn-day-page:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      border-color: #1e3a8a;
+    }
+    .btn-day-page.page-prev {
+      align-items: flex-start;
+      text-align: left;
+    }
+    .btn-day-page.page-next {
+      align-items: flex-end;
+      text-align: right;
+      margin-left: auto;
+      background: #f8fafc;
+      border-color: rgba(30, 58, 138, 0.25);
+    }
+    .btn-day-page.page-next:hover {
+      background: #eff6ff;
+    }
+    .page-nav-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #64748b;
+      letter-spacing: 0.03em;
+      margin-bottom: 2px;
+    }
+    .page-nav-target {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* ========== 親子三要素微型晶片 (Parenting Micro Chips) ========== */
+    .parenting-chips-group {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.35rem;
+    }
+    .p-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.16rem 0.46rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      line-height: 1.2;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    /* 推車狀態 */
+    .p-chip.chip-stroller-yes {
+      background: #f0fdf4;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+    .p-chip.chip-stroller-no {
+      background: #fff7ed;
+      color: #c2410c;
+      border-color: #fed7aa;
+    }
+    /* 尿布育嬰狀態 */
+    .p-chip.chip-nursery-yes {
+      background: #eff6ff;
+      color: #1e40af;
+      border-color: #bfdbfe;
+    }
+    .p-chip.chip-nursery-no {
+      background: #f8fafc;
+      color: #64748b;
+      border-color: #e2e8f0;
+    }
+    /* 暖房狀態 */
+    .p-chip.chip-heated-yes {
+      background: #fef2f2;
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+    .p-chip.chip-heated-cold {
+      background: #f0f9ff;
+      color: #0369a1;
+      border-color: #bae6fd;
+    }
+
+    /* ========== 景點互動打卡機制與進度條 ========== */
+    .visited-progress-strip {
+      background: #ffffff;
+      border: 1px solid rgba(30, 41, 59, 0.12);
+      border-radius: 10px;
+      padding: 0.85rem 1.15rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+    .visited-progress-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+      min-width: 220px;
+    }
+    .visited-progress-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .visited-progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .visited-progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #059669);
+      width: 0%;
+      border-radius: 4px;
+      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-reset-visited {
+      padding: 0.3rem 0.65rem;
+      font-size: 0.72rem;
+      color: #64748b;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-reset-visited:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* 卡片右上角打卡按鈕 */
+    .slot-top {
+      position: relative;
+    }
+    .spot-check-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.22rem 0.55rem;
+      border-radius: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #475569;
+      margin-left: auto;
+      transition: all 0.18s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .spot-check-btn:hover {
+      border-color: #059669;
+      color: #059669;
+      background: #f0fdf4;
+    }
+    .slot.is-visited {
+      border-color: rgba(16, 185, 129, 0.45);
+      background: rgba(240, 253, 244, 0.45);
+      position: relative;
+    }
+    .slot.is-visited .spot-check-btn {
+      background: #059669;
+      border-color: #059669;
+      color: #ffffff;
+    }
+    /* 和風「濟」打卡印章 */
+    .stamp-visited {
+      display: none;
+      position: absolute;
+      top: 0.6rem;
+      right: 5.8rem;
+      width: 32px;
+      height: 32px;
+      border: 2px solid #b91c1c;
+      border-radius: 50%;
+      color: #b91c1c;
+      font-size: 0.74rem;
+      font-weight: 900;
+      line-height: 28px;
+      text-align: center;
+      transform: rotate(-12deg);
+      opacity: 0.88;
+      pointer-events: none;
+      box-shadow: 0 0 0 1px rgba(185, 28, 28, 0.15);
+      letter-spacing: 0;
+      font-family: serif;
+    }
+    .slot.is-visited .stamp-visited {
+      display: block;
+      animation: stampIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes stampIn {
+      0% { transform: rotate(-25deg) scale(1.6); opacity: 0; }
+      100% { transform: rotate(-12deg) scale(1); opacity: 0.88; }
+    }
+
+    /* ========== 地圖聚焦呼吸燈高亮動畫 ========== */
+    .slot.highlight-pulse {
+      animation: pulseHighlight 2s ease-in-out;
+    }
+    @keyframes pulseHighlight {
+      0% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+        border-color: #f59e0b;
+      }
+      50% {
+        box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+        border-color: #f59e0b;
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+      }
+    }
+
     /* 複製提示 Toast */
     .toast-notification {
       position: fixed;
@@ -1781,7 +2037,9 @@
       <div class="cover-stamp">
         <span>飛驒白川</span>
         雪境記念
-      </div>
+      
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d6-s4')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
       <div class="cover-label">Family Winter Journey 2027</div>
       <h1>白川鄉合掌村 <span class="frost">雪境溫泉慢活</span></h1>
       <p class="cover-sub">2大1小（2Y3M）冬季自駕・高山・下呂名湯・美食手帳</p>
@@ -1833,6 +2091,20 @@
     <!-- 3. TAB 1: 行程總覽與地圖 (OVERVIEW) -->
     <section class="tab-panel is-active" data-panel="overview" id="panel-overview">
       
+      <!-- 全行程景點打卡即時進度條 -->
+      <div class="visited-progress-strip">
+        <div class="visited-progress-left">
+          <div class="visited-progress-title-row">
+            <span>全行程景點探索打卡進度</span>
+            <span id="visited-progress-text" style="color: #059669; font-family: ui-monospace, monospace;">0 / 24 景點 (0%)</span>
+          </div>
+          <div class="visited-progress-bar-bg">
+            <div id="visited-progress-bar" class="visited-progress-bar-fill"></div>
+          </div>
+        </div>
+        <button class="btn-reset-visited" onclick="resetVisitedProgress()" title="清空全部打卡狀態重新記錄">重設打卡進度</button>
+      </div>
+
       <!-- 6 日氣候概況與穿搭指南條 -->
       <div class="weather-forecast-strip">
         <div class="weather-strip-title">
@@ -2238,12 +2510,17 @@
 
         <div class="timeline">
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d1-s1" data-spot-id="d1-s1" class="slot-top">
               <span class="time">14:55 – 18:30</span>
               <span class="tags"><span class="tag-pill baby">商務艙優先禮遇</span></span>
             </div>
             <div class="place">星宇航空 JX838 航班（TPE ➔ NGO）</div>
             <div class="place-en">STARLUX Airlines Business Class</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">登機門推車托運</span>
+              <span class="p-chip chip-nursery-yes">航廈與機上設尿布台</span>
+              <span class="p-chip chip-heated-yes">全室內恆溫暖房</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=桃園國際機場第一航廈" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2270,16 +2547,23 @@
           </div>
 
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d1-s2" data-spot-id="d1-s2" class="slot-top">
               <span class="time">19:15 – 19:45</span>
               <span class="tags"><span class="tag-pill">名鐵特急 28 分鐘</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d1-s1')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-left">
               <img src="img/chubu_centrair_airport.jpg" alt="中部國際機場" loading="lazy" />
               <div class="caption">Chubu Centrair International Airport · 中部國際空港抵達</div>
             </div>
             <div class="place">中部國際機場 ➔ 名鐵名古屋站</div>
             <div class="place-en">Meitetsu Airport Express μ-SKY</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">μ-SKY 大件行李架</span>
+              <span class="p-chip chip-nursery-yes">名鐵車站設無障礙公廁</span>
+              <span class="p-chip chip-heated-yes">電車暖房直達名站</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=中部国際空港第1ターミナル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2310,16 +2594,23 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d1-s3" data-spot-id="d1-s3" class="slot-top">
               <span class="time">20:00</span>
               <span class="tags"><span class="tag-pill baby">車站直通免吹冷風</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d1-s2')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-right">
               <img src="img/nagoya_gate_tower.jpg" alt="名古屋 JR 門樓飯店" loading="lazy" />
               <div class="caption">Nagoya JR Gate Tower Hotel Room View · 名古屋高空夜景</div>
             </div>
             <div class="place">入住名古屋 JR 門樓飯店 / 萬豪飯店</div>
             <div class="place-en">Nagoya JR Gate Tower Hotel</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">名站共構直通電梯</span>
+              <span class="p-chip chip-nursery-yes">房內加濕器與嬰兒備品</span>
+              <span class="p-chip chip-heated-yes">室內暖氣免吹冷風</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=名古屋JRゲートタワーホテル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2361,7 +2652,17 @@
             若冬季中部機場降雪導致班機稍有延遲，抵達名鐵名古屋站後取消戶外或美食街排隊，直接於飯店 1F 門樓商場便利商店或高島屋地下美食街購買熱湯麵與日式熟食便當帶回客房；提早幫孩子放溫熱水澡適應氣溫，確保隔日自駕精神充沛。
           </div>
         </details>
-      </article>
+                <div class="day-pagination-nav">
+            <a href="javascript:void(0)" onclick="switchDay('overview')" class="btn-day-page page-prev">
+              <span class="page-nav-label">返回前頁</span>
+              <span class="page-nav-target">總覽地圖與指南</span>
+            </a>
+            <a href="javascript:void(0)" onclick="switchDay('d2')" class="btn-day-page page-next">
+              <span class="page-nav-label">下一天行程</span>
+              <span class="page-nav-target">Day 02 · 郡上高山自駕 ➔</span>
+            </a>
+          </div>
+</article>
     </section>
 
     <!-- 5. TAB 3: DAY 2 -->
@@ -2377,12 +2678,19 @@
 
         <div class="timeline">
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d2-s1" data-spot-id="d2-s1" class="slot-top">
               <span class="time">09:30 – 10:00</span>
               <span class="tags"><span class="tag-pill drive">4WD + 雪胎確認</span><span class="tag-pill baby">兒童安全座椅</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d1-s3')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="place">名古屋站前租車據點取車</div>
             <div class="place-en">Toyota / Times Car Rental Nagoya Station</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">後廂平放推車大空間</span>
+              <span class="p-chip chip-nursery-yes">租車門市附設洗手間</span>
+              <span class="p-chip chip-heated-yes">車內前後排恆溫暖氣</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=トヨタレンタカー+名古屋駅新幹線口店" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2413,16 +2721,23 @@
           </div>
 
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d2-s2" data-spot-id="d2-s2" class="slot-top">
               <span class="time">11:15 – 13:00</span>
               <span class="tags"><span class="tag-pill baby">2歲超愛看模型</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d2-s1')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo">
               <img src="img/gujo_sample_kobo.jpg" alt="郡上八幡食品模型" loading="lazy" />
               <div class="caption">Gujo Hachiman Food Replica · 逼真繽紛的拉麵與冰淇淋模型</div>
             </div>
             <div class="place">郡上八幡散策 · 食品模型工房 samplekobo</div>
             <div class="place-en">Gujo Hachiman & Sample Village</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-no">老街石板路建議背巾</span>
+              <span class="p-chip chip-nursery-yes">博覽館案內所設尿布台</span>
+              <span class="p-chip chip-heated-yes">模型工房室內暖房</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=サンプル工房+郡上八幡" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2453,12 +2768,19 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d2-s3" data-spot-id="d2-s3" class="slot-top">
               <span class="time">13:15 – 14:30</span>
               <span class="tags"><span class="tag-pill baby">寶寶午睡時段</span><span class="tag-pill drive">東海北陸道雪景</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d2-s2')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="place">郡上八幡 ➔ 飛驒高山行車（行車約 75 分鐘）</div>
             <div class="place-en">Scenic Snow Drive to Takayama</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">高速服務區平坦好走</span>
+              <span class="p-chip chip-nursery-yes">24H 育嬰哺乳室與熱水</span>
+              <span class="p-chip chip-heated-yes">SA 標高最高室內暖房</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=ひるがの高原サービスエリア" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2489,16 +2811,23 @@
           </div>
 
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d2-s4" data-spot-id="d2-s4" class="slot-top">
               <span class="time">15:00 – 18:30</span>
               <span class="tags"><span class="tag-pill onsen">高山溫泉</span><span class="tag-pill">飛驒牛燒肉</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d2-s3')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-right">
               <img src="img/takayama_old_town.jpg" alt="飛驒高山老街" loading="lazy" />
               <div class="caption">Takayama Sanmachi Suji · 飛驒高山老街飄雪黃昏散策</div>
             </div>
             <div class="place">入住高山 Green Hotel / 飛驒高山老街黃昏步道</div>
             <div class="place-en">Takayama Green Hotel & Sanmachi Suji</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">飯店全區無障礙通道</span>
+              <span class="p-chip chip-nursery-yes">浴場備嬰兒澡盆床圍</span>
+              <span class="p-chip chip-heated-yes">館內地暖與溫泉暖房</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=高山グリーンホテル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2537,7 +2866,17 @@
             若東海北陸自動車道白鳥至清見段因降雪實施嚴格限速或暴雪，取消郡上八幡漫步行程，自駕車速放緩直接開往高山市區；抵達後轉入室內溫暖景點「飛驒高山大鐘乳洞（洞內常年恆溫 12°C）」或提前入住高山 Green Hotel 享受溫泉庭園。
           </div>
         </details>
-      </article>
+                <div class="day-pagination-nav">
+            <a href="javascript:void(0)" onclick="switchDay('d1')" class="btn-day-page page-prev">
+              <span class="page-nav-label">上一天行程</span>
+              <span class="page-nav-target">❮ Day 01 · 抵達名站</span>
+            </a>
+            <a href="javascript:void(0)" onclick="switchDay('d3')" class="btn-day-page page-next">
+              <span class="page-nav-label">下一天行程</span>
+              <span class="page-nav-target">Day 03 · 合掌村雪景 ➔</span>
+            </a>
+          </div>
+</article>
     </section>
 
     <!-- 6. TAB 4: DAY 3 -->
@@ -2560,12 +2899,19 @@
 
         <div class="timeline">
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d3-s1" data-spot-id="d3-s1" class="slot-top">
               <span class="time">09:15 – 10:05</span>
               <span class="tags"><span class="tag-pill drive">車程僅 50 分鐘</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d2-s4')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="place">飛驒高山出發 ➔ 白川鄉合掌村</div>
             <div class="place-en">Drive to Shirakawa-go Historic Village</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">道之驛平坦無障礙車位</span>
+              <span class="p-chip chip-nursery-yes">休息站設暖房洗手間</span>
+              <span class="p-chip chip-heated-yes">24H 除雪情報室暖房</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=道の駅+飛騨白川" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2596,16 +2942,23 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d3-s2" data-spot-id="d3-s2" class="slot-top">
               <span class="time">10:15 – 13:15</span>
               <span class="tags"><span class="tag-pill baby">背巾必備 · 防水連身雪衣</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d3-s1')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo">
               <img src="img/shirakawago_village.jpg" alt="白川鄉合掌村童話雪景" loading="lazy" />
               <div class="caption">Shirakawa-go Winter Wonderland · 白雪靄靄的薑餅屋童話村</div>
             </div>
             <div class="place">合掌造村落漫步 · 和田家內部參觀 · 相逢橋拍照</div>
             <div class="place-en">Wada House & Deai Bridge Snow Walk</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-no">積雪深厚強烈建議背巾</span>
+              <span class="p-chip chip-nursery-yes">せせらぎ館設尿布台</span>
+              <span class="p-chip chip-heated-cold">戶外極寒著防水雪衣</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=白川郷せせらぎ公園駐車場" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2639,16 +2992,23 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d3-s3" data-spot-id="d3-s3" class="slot-top">
               <span class="time">13:15 – 14:15</span>
               <span class="tags"><span class="tag-pill baby">經典俯瞰全景</span><span class="tag-pill drive">寶寶午睡車程</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d3-s2')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-left">
               <img src="img/shirakawago_viewpoint.jpg" alt="白川鄉城山天守閣展望台" loading="lazy" />
               <div class="caption">Shiroyama Viewpoint Panorama · 荻町城山天守閣俯瞰合掌全景</div>
             </div>
             <div class="place">白川鄉荻町城山天守閣展望台 ➔ 返回高山市區</div>
             <div class="place-en">Shiroyama Viewpoint & Return Drive to Takayama</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-no">斜坡步道建議抱行背巾</span>
+              <span class="p-chip chip-nursery-no">展望台公廁設備較陽春</span>
+              <span class="p-chip chip-heated-cold">山頂風大注意防風防寒</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=城山天守閣展望台+白川郷" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2679,10 +3039,12 @@
           </div>
 
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d3-s4" data-spot-id="d3-s4" class="slot-top">
               <span class="time">15:30 – 19:30</span>
               <span class="tags"><span class="tag-pill onsen">雪見露天風呂</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d3-s3')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-right">
               <img src="img/hida_beef_yakiniku.jpg" alt="飛驒牛燒肉" loading="lazy" />
               <div class="caption">Takayama Hida Wagyu Yakiniku · 頂級 A5 霜降飛驒牛燒肉盛宴</div>
@@ -2696,6 +3058,11 @@
             </div>
             <div class="place">高山飯店溫泉休整 · 高山特產飛驒牛壽司與燒肉</div>
             <div class="place-en">Hot Springs & Rest in Takayama</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">燒肉店寬敞備兒童椅</span>
+              <span class="p-chip chip-nursery-yes">店內設獨立男女洗手間</span>
+              <span class="p-chip chip-heated-yes">炭烤室內溫暖舒適</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=味蔵天国+高山" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2734,7 +3101,17 @@
             若清晨 NEXCO 發布飛驒清見至白川鄉高速公路封閉（通行止），切勿冒險行駛積雪山路；立即切換為高山市郊景點「飛驒之里（飛騨の里）」，同樣為傳統合掌造茅草民家聚落，距高山站僅 10 分鐘車程，無山路風險且人潮極少，能輕鬆完成雪地踩雪與拍照！
           </div>
         </details>
-      </article>
+                <div class="day-pagination-nav">
+            <a href="javascript:void(0)" onclick="switchDay('d2')" class="btn-day-page page-prev">
+              <span class="page-nav-label">上一天行程</span>
+              <span class="page-nav-target">❮ Day 02 · 郡上高山</span>
+            </a>
+            <a href="javascript:void(0)" onclick="switchDay('d4')" class="btn-day-page page-next">
+              <span class="page-nav-label">下一天行程</span>
+              <span class="page-nav-target">Day 04 · 朝市與下呂 ➔</span>
+            </a>
+          </div>
+</article>
     </section>
 
     <!-- 7. TAB 5: DAY 4 -->
@@ -2757,16 +3134,23 @@
 
         <div class="timeline">
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d4-s1" data-spot-id="d4-s1" class="slot-top">
               <span class="time">09:30 – 10:30</span>
               <span class="tags"><span class="tag-pill baby">寶寶愛吃現切蘋果</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d3-s4')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-left">
               <img src="img/miyagawa_morning_market.jpg" alt="高山宮川朝市" loading="lazy" />
               <div class="caption">Takayama Miyagawa Morning Market · 宮川朝市雪中漫步</div>
             </div>
             <div class="place">高山宮川朝市晨間漫步</div>
             <div class="place-en">Miyagawa Morning Market</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-no">河畔雪泥建議防滑背巾</span>
+              <span class="p-chip chip-nursery-no">朝市沿線洗手間較少</span>
+              <span class="p-chip chip-heated-cold">晨間清冷戴毛帽雙長襪</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=宮川朝市+高山" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2797,16 +3181,23 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d4-s2" data-spot-id="d4-s2" class="slot-top">
               <span class="time">10:45 – 12:15</span>
               <span class="tags"><span class="tag-pill baby">全室內溫暖防風</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d4-s1')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-left">
               <img src="img/takayama_jinya_snow.jpg" alt="高山陣屋雪景" loading="lazy" />
               <div class="caption">Takayama Jinya Historic Winter · 高山陣屋雪景歷史古蹟</div>
             </div>
             <div class="place">高山陣屋散策 · 高山昭和館童玩體驗</div>
             <div class="place-en">Takayama Showa-kan Museum</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-no">古蹟門檻多需寄放推車</span>
+              <span class="p-chip chip-nursery-yes">陣屋前公廁設尿布台</span>
+              <span class="p-chip chip-heated-yes">昭和館全室內暖房童玩</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=高山陣屋" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2837,12 +3228,19 @@
           </div>
 
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d4-s3" data-spot-id="d4-s3" class="slot-top">
               <span class="time">13:15 – 14:30</span>
               <span class="tags"><span class="tag-pill drive">國道 41 號南下</span><span class="tag-pill baby">寶寶午睡</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d4-s2')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="place">高山 ➔ 下呂溫泉（行車約 70 分鐘）</div>
             <div class="place-en">Drive South to Gero Onsen</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">道之驛平坦好推推車</span>
+              <span class="p-chip chip-nursery-yes">設無障礙公廁與哺乳室</span>
+              <span class="p-chip chip-heated-yes">麵包坊特產室內暖房</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=道の駅+飛騨街道なぎさ" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2873,16 +3271,23 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d4-s4" data-spot-id="d4-s4" class="slot-top">
               <span class="time">15:00</span>
               <span class="tags"><span class="tag-pill onsen">專屬家族貸切風呂</span><span class="tag-pill">部屋食會席料理</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d4-s3')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-right">
               <img src="img/gero_onsen.jpg" alt="下呂溫泉雪見露天風呂" loading="lazy" />
               <div class="caption">Gero Onsen Private Family Bath · 下呂溫泉雪見家族風呂</div>
             </div>
             <div class="place">入住下呂溫泉頂級旅館（水明館 / 湯之島館）</div>
             <div class="place-en">Gero Onsen Suimeikan / Yunoshimakan</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">全館電梯推車通行無阻</span>
+              <span class="p-chip chip-nursery-yes">家族貸切私湯幼童安心</span>
+              <span class="p-chip chip-heated-yes">三大名湯全館恆溫</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=下呂温泉+水明館" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2921,7 +3326,17 @@
             若高山清晨暴雪夾帶強風，取消宮川河畔露天朝市，全天轉入全室內暖氣的高山昭和館，昭和館內復古雜貨鋪與童玩區可讓 2 歲幼童在溫暖室內充分活動；隨後中午提前出發前往下呂溫泉，提早 Check-in 享受貸切家族風呂。
           </div>
         </details>
-      </article>
+                <div class="day-pagination-nav">
+            <a href="javascript:void(0)" onclick="switchDay('d3')" class="btn-day-page page-prev">
+              <span class="page-nav-label">上一天行程</span>
+              <span class="page-nav-target">❮ Day 03 · 白川合掌村</span>
+            </a>
+            <a href="javascript:void(0)" onclick="switchDay('d5')" class="btn-day-page page-next">
+              <span class="page-nav-label">下一天行程</span>
+              <span class="page-nav-target">Day 05 · 返名古屋採購 ➔</span>
+            </a>
+          </div>
+</article>
     </section>
 
     <!-- 8. TAB 6: DAY 5 -->
@@ -2944,16 +3359,23 @@
 
         <div class="timeline">
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d5-s1" data-spot-id="d5-s1" class="slot-top">
               <span class="time">09:30 – 11:00</span>
               <span class="tags"><span class="tag-pill onsen">免費足湯體驗</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d4-s4')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-left">
               <img src="img/gero_onsen_town.jpg" alt="下呂溫泉街白鷺足湯" loading="lazy" />
               <div class="caption">Gero Onsen Ashiyu & Town Walk · 下呂溫泉街白鷺足湯亭</div>
             </div>
             <div class="place">下呂溫泉街 · 白鷺之湯 · 下呂布丁</div>
             <div class="place-en">Gero Onsen Town Walk & Gero Pudding</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">溫泉街坡度平緩好走</span>
+              <span class="p-chip chip-nursery-yes">阿多野谷公廁設尿布台</span>
+              <span class="p-chip chip-heated-cold">戶外足湯暖腳散策</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=白鷺の湯+下呂温泉" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -2984,12 +3406,19 @@
           </div>
 
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d5-s2" data-spot-id="d5-s2" class="slot-top">
               <span class="time">11:30 – 13:30</span>
               <span class="tags"><span class="tag-pill drive">南下返回名古屋</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d5-s1')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="place">下呂出發 ➔ 名古屋市區（行車約 2 小時）</div>
             <div class="place-en">Drive Back to Nagoya City</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">休息站平面無障礙車位</span>
+              <span class="p-chip chip-nursery-yes">白川茶館內設哺乳室</span>
+              <span class="p-chip chip-heated-yes">茶工房與餐廳室內暖房</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=道の駅+美濃白川+ピアチェーレ" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -3020,10 +3449,12 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d5-s3" data-spot-id="d5-s3" class="slot-top">
               <span class="time">14:00</span>
               <span class="tags"><span class="tag-pill drive">還車解除雪駕任務</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d5-s2')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="gas-station-box">
               <h4>市區還車前 5 公里指定滿油加油站（滿タン返し）</h4>
               <p>
@@ -3034,6 +3465,11 @@
             </div>
             <div class="place">名古屋市區歸還租車 ➔ 入住榮町商圈飯店</div>
             <div class="place-en">Return Rental Car & Check-in Sakae</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">還車站與飯店均設電梯</span>
+              <span class="p-chip chip-nursery-yes">飯店提供嬰兒床與澡盆</span>
+              <span class="p-chip chip-heated-yes">市區各大商場暖氣完備</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=トヨタレンタカー+名古屋駅新幹線口店" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -3064,16 +3500,23 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d5-s4" data-spot-id="d5-s4" class="slot-top">
               <span class="time">15:30 – 18:00</span>
               <span class="tags"><span class="tag-pill baby">阿卡將母嬰</span><span class="tag-pill">水之宇宙船</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d5-s3')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-right">
               <img src="img/nagoya_oasis21_night.jpg" alt="名古屋綠洲21水之宇宙船" loading="lazy" />
               <div class="caption">Nagoya Oasis 21 & Mirai Tower · 綠洲 21 水之宇宙船璀璨夜景</div>
             </div>
             <div class="place">阿卡將母嬰採購 · 久屋大通公園 · 綠洲 21 水之宇宙船</div>
             <div class="place-en">Akachan Honpo, Hisaya-odori Park & Oasis 21</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">阿卡將旗艦店推車極順</span>
+              <span class="p-chip chip-nursery-yes">旗艦級授乳室與溫水機</span>
+              <span class="p-chip chip-heated-yes">地下街直通溫暖避寒</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=オアシス21+名古屋" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -3104,10 +3547,12 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d5-s5" data-spot-id="d5-s5" class="slot-top">
               <span class="time">18:30 – 20:00</span>
               <span class="tags"><span class="tag-pill">名古屋排隊名店</span><span class="tag-pill baby">兒童座椅齊備</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d5-s4')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-left">
               <img src="img/nagoya_hitsumabushi.jpg" alt="熱田蓬萊軒鰻魚飯三吃" loading="lazy" />
               <div class="caption">Nagoya Hitsumabushi · 熱田蓬萊軒經典炭烤鰻魚飯三吃</div>
@@ -3120,6 +3565,11 @@
             </div>
             <div class="place">晚餐 · 熱田蓬萊軒（松坂屋店）炭烤鰻魚飯三吃</div>
             <div class="place-en">Atsuta Houraiken Hitsumabushi</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">百貨電梯直達 10F 美食</span>
+              <span class="p-chip chip-nursery-yes">松坂屋高級育嬰哺乳室</span>
+              <span class="p-chip chip-heated-yes">店內備兒童餐椅暖房</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=あつた蓬莱軒+松坂屋店" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -3158,7 +3608,17 @@
             若名古屋市區遇降雨或低溫冷風，取消久屋大通公園露天散步，改前往「名古屋市科學館（全球最大巨蛋天文館）」或「則武之森（Noritake Garden）室內文化工藝館與咖啡廳」，全程室內無障礙且設有完善育嬰設施。
           </div>
         </details>
-      </article>
+                <div class="day-pagination-nav">
+            <a href="javascript:void(0)" onclick="switchDay('d4')" class="btn-day-page page-prev">
+              <span class="page-nav-label">上一天行程</span>
+              <span class="page-nav-target">❮ Day 04 · 昭和館下呂</span>
+            </a>
+            <a href="javascript:void(0)" onclick="switchDay('d6')" class="btn-day-page page-next">
+              <span class="page-nav-label">下一天行程</span>
+              <span class="page-nav-target">Day 06 · 鐵道館返台 ➔</span>
+            </a>
+          </div>
+</article>
     </section>
 
     <!-- 9. TAB 7: DAY 6 -->
@@ -3181,16 +3641,23 @@
 
         <div class="timeline">
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d6-s1" data-spot-id="d6-s1" class="slot-top">
               <span class="time">10:00 – 13:00</span>
               <span class="tags"><span class="tag-pill baby">男孩女孩都瘋狂</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d5-s5')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo">
               <img src="img/scmaglev_museum.jpg" alt="磁浮鐵道館" loading="lazy" />
               <div class="caption">SCMAGLEV and Railway Park · 真實新幹線與超電導磁浮列車</div>
             </div>
             <div class="place">磁浮鐵道館（Scmaglev and Railway Park）</div>
             <div class="place-en">SCMAGLEV and Railway Park</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">全館大型斜坡與電梯</span>
+              <span class="p-chip chip-nursery-yes">幼兒專用哺乳室遊戲區</span>
+              <span class="p-chip chip-heated-yes">全室內恆溫暖房大放電</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=リニア・鉄道館" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -3221,12 +3688,19 @@
           </div>
 
           <div class="slot">
-            <div class="slot-top">
+            <div id="spot-d6-s2" data-spot-id="d6-s2" class="slot-top">
               <span class="time">14:00 – 15:00</span>
               <span class="tags"><span class="tag-pill">名鐵特急</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d6-s1')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="place">名古屋市區 ➔ 中部國際機場（NGO）</div>
             <div class="place-en">Train to Chubu Centrair International Airport</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">特急行李架與平坦月台</span>
+              <span class="p-chip chip-nursery-yes">名鐵與機場廣場育嬰室</span>
+              <span class="p-chip chip-heated-yes">全封閉式溫暖車廂</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=名鉄名古屋駅" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -3257,16 +3731,23 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d6-s3" data-spot-id="d6-s3" class="slot-top">
               <span class="time">14:30 – 17:30</span>
               <span class="tags"><span class="tag-pill baby">常滑巨型招財貓</span><span class="tag-pill">波音787公園</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d6-s2')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="polaroid-photo rotate-right">
               <img src="img/tokoname_manekineko.jpg" alt="常滑巨型招財貓" loading="lazy" />
               <div class="caption">Tokoname Giant Tokonyan · 常滑巨大招財貓守護平安返台</div>
             </div>
             <div class="place">常滑巨型招財貓 ＆ FLIGHT OF DREAMS（波音 787 實機公園）</div>
             <div class="place-en">Tokoname Giant Tokonyan & Flight of Dreams</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">波音公園無障礙平坦</span>
+              <span class="p-chip chip-nursery-yes">機場多處優質哺乳室</span>
+              <span class="p-chip chip-heated-yes">航廈與公園全室內溫暖</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=とこにゃん+常滑市" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -3301,12 +3782,19 @@
           </div>
 
           <div class="slot highlight">
-            <div class="slot-top">
+            <div id="spot-d6-s4" data-spot-id="d6-s4" class="slot-top">
               <span class="time">17:40 – 22:15</span>
               <span class="tags"><span class="tag-pill">星宇 JX839</span></span>
-            </div>
+            
+              <button class="spot-check-btn" onclick="toggleSpotVisited('d6-s3')" title="標記此景點為已抵達"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡</button>
+              <div class="stamp-visited">濟</div></div>
             <div class="place">星宇航空報到 ➔ 返抵台灣（TPE）</div>
             <div class="place-en">STARLUX Airlines JX839 (NGO 19:40 ➔ TPE 22:15)</div>
+            <div class="parenting-chips-group">
+              <span class="p-chip chip-stroller-yes">登機門推車優先交付</span>
+              <span class="p-chip chip-nursery-yes">貴賓室出境大廳育嬰室</span>
+              <span class="p-chip chip-heated-yes">星宇商務艙舒適返台</span>
+            </div>
             <div class="spot-nav-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=中部国際空港第1ターミナル" target="_blank" rel="noopener noreferrer" class="btn-nav-gmap" title="開啟 Google Maps 導航">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -3345,7 +3833,17 @@
             若在磁浮鐵道館遊玩後幼童已熟睡或大人體力需調適，取消常滑市區停留，直接搭乘名鐵前往中部國際機場第二航廈 FLIGHT OF DREAMS；在波音 787 機翼下的星巴克與室內休息區悠閒整理行李，讓幼童在登機前盡情在室內軟質地墊爬行放電。
           </div>
         </details>
-      </article>
+                <div class="day-pagination-nav">
+            <a href="javascript:void(0)" onclick="switchDay('d5')" class="btn-day-page page-prev">
+              <span class="page-nav-label">上一天行程</span>
+              <span class="page-nav-target">❮ Day 05 · 名古屋榮商圈</span>
+            </a>
+            <a href="javascript:void(0)" onclick="switchDay('guide')" class="btn-day-page page-next">
+              <span class="page-nav-label">實用手冊</span>
+              <span class="page-nav-target">2Y3M 親子生存手冊 ➔</span>
+            </a>
+          </div>
+</article>
     </section>
 
     <!-- 10. TAB 8: 2Y3M 親子雪地生存手冊 (GUIDE) -->
@@ -3640,12 +4138,12 @@
         }).addTo(map);
 
         const spots = [
-          { name: "名古屋中部國際機場 (NGO)", lat: 34.858, lng: 136.805, desc: "星宇 JX838/JX839 起降", color: "#1e3a8a" },
-          { name: "名古屋站", lat: 35.170, lng: 136.881, desc: "D1/D5 住宿與市區取還車點", color: "#1e3a8a" },
-          { name: "郡上八幡", lat: 35.750, lng: 136.958, desc: "D2 食品模型之鄉與古城", color: "#b91c1c" },
-          { name: "飛驒高山 (三町筋/宮川朝市)", lat: 36.143, lng: 137.257, desc: "D2-D4 住宿核心與朝市昭和館", color: "#b91c1c" },
-          { name: "白川鄉合掌村", lat: 36.256, lng: 136.906, desc: "D3 童話雪白薑餅屋聚落", color: "#c29b38" },
-          { name: "下呂溫泉", lat: 35.808, lng: 137.243, desc: "D4-D5 日本三大名湯家庭貸切風呂", color: "#0d9488" }
+          { name: "名古屋中部國際機場 (NGO)", lat: 34.8584, lng: 136.8125, desc: "D1 抵達搭乘 μ-SKY / D6 787 公園與返台", color: "#1e3a8a", dayId: "d1", spotId: "d1-s2" },
+          { name: "名古屋站 (JR Gate Tower)", lat: 35.1713, lng: 136.8833, desc: "D1/D5 飯店住宿與市區租車取還據點", color: "#1e3a8a", dayId: "d1", spotId: "d1-s3" },
+          { name: "郡上八幡 (食品模型工房)", lat: 35.7508, lng: 136.9587, desc: "D2 食品模型發源地散策與老街", color: "#b91c1c", dayId: "d2", spotId: "d2-s2" },
+          { name: "飛驒高山 (老街 / 朝市 / 陣屋)", lat: 36.1408, lng: 137.2472, desc: "D2-D4 綠色飯店、宮川朝市與昭和館", color: "#b91c1c", dayId: "d2", spotId: "d2-s4" },
+          { name: "白川鄉合掌村 (和田家 / 展望台)", lat: 36.2562, lng: 136.9035, desc: "D3 童話雪白薑餅屋聚落與天守閣", color: "#c29b38", dayId: "d3", spotId: "d3-s2" },
+          { name: "下呂溫泉 (水明館 / 白鷺之湯)", lat: 35.8078, lng: 137.2407, desc: "D4-D5 日本三大名湯家庭私湯與布丁", color: "#0d9488", dayId: "d4", spotId: "d4-s4" }
         ];
 
         const latlngs = [];
@@ -3659,7 +4157,7 @@
             opacity: 1,
             fillOpacity: 0.9
           }).addTo(map);
-          circle.bindPopup(`<b>${s.name}</b><br>${s.desc}`);
+          circle.bindPopup(`<b>${s.name}</b><br><span style="font-size: 0.78rem; color: #64748b;">${s.desc}</span><br><button class="btn-table-copy" style="margin-top: 6px; width: 100%; text-align: center; display: block;" onclick="scrollToSpot(\x27${s.dayId}\x27, \x27${s.spotId}\x27)">檢視當日行程卡片 ➔</button>`);
         });
 
         // 畫出路線連線
@@ -4220,6 +4718,105 @@
       copyText(rowSummary, `【${name}】整列定位資訊`);
     }
 
+    // ========== 景點打卡狀態持久化與進度計算 ==========
+    const VISITED_KEY = 'shirakawago_visited_spots_2027';
+
+    function getVisitedSpots() {
+      try {
+        const stored = localStorage.getItem(VISITED_KEY);
+        return stored ? JSON.parse(stored) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveVisitedSpots(arr) {
+      try {
+        localStorage.setItem(VISITED_KEY, JSON.stringify(arr));
+      } catch (e) {}
+    }
+
+    function initVisitedProgress() {
+      const visited = getVisitedSpots();
+      const allSlots = document.querySelectorAll('.slot[data-spot-id]');
+      const total = allSlots.length || 24;
+
+      allSlots.forEach(slot => {
+        const id = slot.getAttribute('data-spot-id');
+        const btn = slot.querySelector('.spot-check-btn');
+        if (visited.includes(id)) {
+          slot.classList.add('is-visited');
+          if (btn) btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>已打卡';
+        } else {
+          slot.classList.remove('is-visited');
+          if (btn) btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>打卡';
+        }
+      });
+
+      const count = visited.length;
+      const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+      const textEl = document.getElementById('visited-progress-text');
+      const barEl = document.getElementById('visited-progress-bar');
+      if (textEl) textEl.textContent = `${count} / ${total} 景點 (${pct}%)`;
+      if (barEl) barEl.style.width = `${pct}%`;
+    }
+
+    function toggleSpotVisited(spotId) {
+      let visited = getVisitedSpots();
+      const slot = document.getElementById(`spot-${spotId}`);
+      const placeName = slot ? (slot.querySelector('.place')?.textContent || '景點') : '景點';
+
+      if (visited.includes(spotId)) {
+        visited = visited.filter(id => id !== spotId);
+        saveVisitedSpots(visited);
+        initVisitedProgress();
+        showToast(`已取消【${placeName}】打卡狀態`);
+      } else {
+        visited.push(spotId);
+        saveVisitedSpots(visited);
+        initVisitedProgress();
+        showToast(`已完成【${placeName}】打卡記錄！`);
+      }
+    }
+
+    function resetVisitedProgress() {
+      if (confirm('確定要清空全行程的景點打卡紀錄嗎？')) {
+        localStorage.removeItem(VISITED_KEY);
+        initVisitedProgress();
+        showToast('已重設全行程景點打卡進度');
+      }
+    }
+
+    // ========== 地圖與時間軸雙向連動平滑滾動 ==========
+    function scrollToSpot(dayId, spotId) {
+      // 1. 切換至對應分頁
+      switchDay(dayId);
+
+      // 2. 稍待分頁 DOM 切換後平滑滾動至該節點
+      setTimeout(() => {
+        const target = document.getElementById(`spot-${spotId}`);
+        if (!target) return;
+        const offset = 80; // 預留頂部 Sticky Tab 導航列高度
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = target.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+
+        // 3. 觸發呼吸燈高亮動畫
+        target.classList.remove('highlight-pulse');
+        void target.offsetWidth; // 強制重繪觸發動畫
+        target.classList.add('highlight-pulse');
+        setTimeout(() => {
+          target.classList.remove('highlight-pulse');
+        }, 2200);
+      }, 90);
+    }
+
     // 註冊 Service Worker 離線支援
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -4235,6 +4832,7 @@
       initChecklist();
       initSnowfall();
       initExpenses();
+      initVisitedProgress();
 
       // 回到頂部按鈕邏輯
       const backToTopBtn = document.getElementById("btn-back-to-top");
